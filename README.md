@@ -2,71 +2,114 @@
 
 A retro "Windows desktop" portfolio, made from my Figma prototype *Portfolio desktop*.
 Hand-coded with **HTML, SCSS and JavaScript** (classes + import/export). No frameworks.
+Live at **https://alenie.dk** (site in the root of the domain).
 
 ## Files
 
 ```
-index.html          Home (desktop with icons)
-about.html          About me
-work.html           My projects (folders)
-toolbox.html        Tools and technologies
-contact.html        Contact
-ovio.html           Case study 01
-garn-og-craft.html  Case study 02
-404.html            "Page not found"
+index.html               Home (desktop with icons + "Welcome" box)
+about.html               About me (+ short summary in French)
+work.html                My projects (folders, made by main.js)
+toolbox.html             Tools and technologies
+contact.html             Contact + CV
+ovio.html                Case study 01
+garn-og-craft.html       Case study 02
+gls-ai-playbook.html     Case study 03
+phishing-awareness.html  Case study 04
+404.html                 "Page not found" (shown by .htaccess)
+.htaccess                simply.com settings (404 page)
 
 scss/_mixins.scss   variables (colours, fonts) + mixins
 scss/style.scss     all the styles  →  compiled to css/style.css
 
-js/classes.js       all classes (Project, DesktopIcon, ProjectFolder, ReadMore) – exported
+js/classes.js       all classes (Project, DesktopIcon, ProjectFolder, ReadMore) + showMessage – exported
 js/main.js          imports the classes and uses them on the page
 
 assets/             fonts, images, icons
+assets/cv/          put my CV here as alexandra-nielsen-cv.pdf
 docs/               plan, OOUX object map, AI log
 ```
 
 ## How to work on it
 
 1. Open the folder in VS Code.
-2. Click **Watch Sass** in the bottom bar (Live Sass Compiler). It turns `style.scss` into `css/style.css`.
-3. Right-click `index.html` → **Open with Live Server**.
-   (The JavaScript uses `import`, which only works through a server. Double-clicking the HTML file won't work.)
+2. Click **Watch Sass** in the bottom bar (Live Sass Compiler). It turns `scss/style.scss` into `css/style.css`
+   (set up in `.vscode/settings.json`). Only edit the SCSS – never `css/style.css` by hand.
+3. Click **Go Live** in the bottom bar, or right-click `index.html` → **Open with Live Server**.
+   The address must start with `http://127.0.0.1:5501/`. If it starts with `file:///`, the JavaScript
+   (which uses `import`) is blocked, and the Work folders won't appear.
+4. If Chrome shows an old version: **Cmd + Shift + R**.
 
 ## The JavaScript in short
 
 | Class | What it does | OOP |
 |---|---|---|
-| `Project` | One of my projects: title, page, status | private field `#status` + getter `isReady` (encapsulation) |
-| `DesktopIcon` | Click = select, double-click = open | `static selected` shared by all icons |
-| `ProjectFolder` | A folder on the Work page | `extends DesktopIcon` (inheritance), *has a* Project (composition), overrides `open()` |
-| `ReadMore` | "Do you want to read more? Yes" shows the rest of the case | |
+| `Project` | One of my projects: title, page, status, preview picture, tag | private field `#status` + getter `isReady` (encapsulation) |
+| `DesktopIcon` | Hover/focus = selected (blue label). Click = open, like a normal link, so Cmd-click opens a new tab | `static selected` shared by all icons |
+| `ProjectFolder` | A folder on the Work page, with a preview peeking out | `extends DesktopIcon` (inheritance), *has a* Project (composition), overrides `handleClick()` (polymorphism) |
+| `ReadMore` | "Do you want to read more? Yes" scrolls down to the rest of the case and moves focus there | |
+| `showMessage()` | A Windows 98 message box (native `<dialog>`), e.g. "coming soon" | function, not a class |
 
 To add a project to the Work page: add a line to the `projects` list at the top of `js/main.js`.
+The order of that list is the order of the folders.
+
+## Fonts
+
+All fonts are self-hosted in `assets/fonts/` (nothing loads from Google, so no visitor data goes to Google).
+A browser only downloads the fonts a page actually uses.
+
+- **DM Sans**, **Bricolage Grotesque**: the whole site.
+- **Lexend / Lexend Giga / Rubik Spray Paint**: OVIO. **Merriweather Sans / Roboto**: Garn & Craft.
+- **Lato**: Phishing Awareness (SIL Open Font License – `lato-OFL-license.txt`).
+- **Newson**: GLS AI Playbook. A licensed font: my own `Newson-Regular.ttf` and `Newson-Medium.ttf`.
+  Without them the page falls back to DM Sans.
 
 ## Publish on simply.com
 
 1. Log in to simply.com → alenie.dk → FTP details (or use the File Manager).
-2. Upload: all `.html` files, `.htaccess`, and the folders `css/`, `js/`, `assets/`.
+2. Upload to the root of the site: all `.html` files, `.htaccess`, and the folders `css/`, `js/`, `assets/`.
    (You don't need `scss/`, `docs/`, `.vscode/`, `.claude/` or `README.md`.)
 3. Turn on HTTPS (Let's Encrypt) in the simply.com control panel.
-
-## October 2026 update
-Added original GLS and phishing case study screenshots and accessible companion text, plus a seamless scrolling banner with pause control and reduced-motion support. Original assets retained unchanged.
-
-
-## Project fonts
-Phishing Awareness uses Lato, loaded from Google Fonts (requires internet). GLS AI Playbook is configured to use Newson, but the font file was not included in the supplied project. Until you add your licensed Newson font, it falls back to DM Sans. To enable it, add your licensed font files and a corresponding `@font-face` declaration in both CSS and SCSS.
-
-## Newson font setup
-
-Copy your own `Newson-Regular.ttf` and `Newson-Medium.ttf` files into `assets/fonts/`.
-The GLS AI Playbook page now loads these with `@font-face` (Regular 400, Medium 500–900).
-The Phishing Awareness page continues to use Lato. The font files are not redistributed in this ZIP.
+4. Check a made-up address (e.g. alenie.dk/abc) shows the 404 page, and paste a page link into
+   LinkedIn's Post Inspector to see the share preview.
 
 
 ## Review & improvement plan (October 2026)
 
 > Written by Claude (Claude Code) on 2026-10-27, from the code and the site viewed locally at 1440, 800 and 375px wide (Figma not used). Priorities: the internship in France comes first, the exam second. All four case studies are solo projects. LinkedIn: add later, once the profile exists.
+
+### Status after the changes on 27 October 2026 (`dev` branch)
+
+**Done**
+- ✅ Contact email link fixed. CV buttons (View / Download) on About and Contact.
+- ✅ Case-page loop: OVIO → Garn & Craft → GLS → Phishing → OVIO, with "All work" in the middle.
+- ✅ Icons open with one click (Cmd-click works). Hover/focus selects. The "double-click" tip is gone.
+- ✅ `.htaccess` added (404 page). The site lives in the root of alenie.dk, so the 404 paths are right, and the fake address bars now show `alenie.dk/about` etc.
+- ✅ SCSS compiles again, and Watch Sass writes to `css/style.css`.
+- ✅ Home: a Win98 "Welcome" box says who I am and links to my work. All icons have visible labels. VS Code opens the coded phishing project.
+- ✅ Work: the project window comes first (phones see the projects before the drawing). Each folder has a preview peeking out and a tag (e.g. "Branding + web · Solo project").
+- ✅ The read-more gate no longer hides anything. "Yes" scrolls down, "No" goes back. It's used on all 4 cases.
+- ✅ GLS and Phishing rebuilt on the same template as OVIO and Garn ("Case study 03/04"), with readable HTML, image sizes, their own colours and fonts, and no bolted-on CSS.
+- ✅ "Solo project" on every case.
+- ✅ Window ✕ buttons on About, Work, Toolbox and Contact go back to the desktop.
+- ✅ Toolbox grouped by what I do. Each tool links to the cases where I used it, and one line about AI replaces the three chatbot logos.
+- ✅ About leads with what I do, then "Looking for / Based in / Languages", the CV, and a short summary in French. Contact has a visible heading and says where I am.
+- ✅ Lato is self-hosted (no Google Fonts, no GDPR issue).
+- ✅ 2.8 MB of unused images removed. Folder previews are small (7–24 KB).
+- ✅ Open Graph tags (share preview) on every page.
+- ✅ Copy: the same date format everywhere, "front page", and the phishing sender-address sentence.
+
+**Still for me (Alexandra)**
+- ⬜ Put my CV in `assets/cv/alexandra-nielsen-cv.pdf` (until then the CV buttons lead to "not found").
+- ⬜ LinkedIn: add to Contact, About and the footer once the profile exists.
+- ⬜ Ask IBA how the French *convention de stage* is handled, and mention it on the CV/site if it's covered.
+- ⬜ Newson font licence: check whether it allows the font files to be in a public GitHub repo. If not, add them to `.gitignore`.
+- ⬜ Export `assets/img/home/monitor-portfolio.png` (863 KB) as WebP from Photoshop and use it on the home page. Keep the PNG for the share preview.
+- ⬜ Folder order on Work: currently in case-number order. Put my strongest project first (one line in `js/main.js`).
+- ⬜ Check the French text on About and Contact, and the new About wording – it should sound like me.
+- ⬜ Write my own assessment of today's AI work in `docs/ai-log.md`.
+
+> Correction to the review below: "Too many fonts" is less of a problem than I wrote. Browsers only download a font when a page uses it (checked: each page loads only its own fonts).
 
 ### Verdict in one paragraph
 The concept is strong and memorable. A retro Win98/XP desktop with a hand-made "PORTFOLIO" monitor and Paint drawings has real personality, and the code is clean and explainable for the exam. The problem is that **the concept currently gets in the way of the content**. A recruiter in France who opens the site sees a monitor, a scrolling ticker and unlabeled folders. In the first 10 seconds they do not learn what you do, what your best project is, or how to hire you. On top of that, the site was finished by two different processes, and it shows: two case pages use a different template, minified code and a bolted-on stylesheet. Fix the first-impression path and unify the case pages, and the site goes from "fun student project" to "hire this person".

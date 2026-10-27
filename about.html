@@ -6,8 +6,16 @@
     <title>About – Alexandra Nielsen</title>
     <meta
       name="description"
-      content="About Alexandra Nielsen, Danish multimedia design student at IBA Kolding, living in Montrouge, France."
+      content="About Alexandra Nielsen, Danish multimedia design student at IBA Kolding, based in Montrouge (Paris area) and looking for an internship in France in 2027."
     />
+    <!-- Preview when the link is shared (LinkedIn, Slack, …) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Alexandra Nielsen – Portfolio" />
+    <meta property="og:title" content="About – Alexandra Nielsen" />
+    <meta property="og:description" content="About Alexandra Nielsen, Danish multimedia design student at IBA Kolding, based in Montrouge (Paris area) and looking for an internship in France in 2027." />
+    <meta property="og:url" content="https://alenie.dk/about.html" />
+    <meta property="og:image" content="https://alenie.dk/assets/img/home/monitor-portfolio.png" />
+    <meta property="og:image:alt" content="A retro computer monitor with the word PORTFOLIO on a Windows XP background" />
     <link rel="icon" href="assets/icons/favicon.png" />
     <link rel="stylesheet" href="css/style.css" />
     <script type="module" src="js/main.js"></script>
@@ -33,17 +41,15 @@
       <div class="desktop about">
         <!-- Window with the photo (behind) -->
         <div class="window about__photo">
-          <div class="window__titlebar" aria-hidden="true">
+          <div class="window__titlebar">
             <div class="window__controls">
-              <span class="window__control"
+              <span class="window__control" aria-hidden="true"
                 ><svg><use href="assets/icons/ui.svg#minimize"></use></svg
               ></span>
-              <span class="window__control"
+              <span class="window__control" aria-hidden="true"
                 ><svg><use href="assets/icons/ui.svg#maximize"></use></svg
               ></span>
-              <span class="window__control"
-                ><svg><use href="assets/icons/ui.svg#close"></use></svg
-              ></span>
+              <a class="window__control" href="index.html" aria-label="Close window and go to the desktop"><svg aria-hidden="true" focusable="false"><use href="assets/icons/ui.svg#close"></use></svg></a>
             </div>
           </div>
           <div class="browser-bar" aria-hidden="true">
@@ -55,7 +61,7 @@
             <div class="browser-bar__address">
               <svg><use href="assets/icons/ui.svg#globe"></use></svg>
               <span class="browser-bar__url"
-                >https://www.alenie.dk/portfolio/about</span
+                >https://www.alenie.dk/about</span
               >
               <svg class="browser-bar__star">
                 <use href="assets/icons/ui.svg#star"></use>
@@ -75,17 +81,15 @@
 
         <!-- Window with the text (in front) -->
         <div class="window about__me">
-          <div class="window__titlebar" aria-hidden="true">
+          <div class="window__titlebar">
             <div class="window__controls">
-              <span class="window__control"
+              <span class="window__control" aria-hidden="true"
                 ><svg><use href="assets/icons/ui.svg#minimize"></use></svg
               ></span>
-              <span class="window__control"
+              <span class="window__control" aria-hidden="true"
                 ><svg><use href="assets/icons/ui.svg#maximize"></use></svg
               ></span>
-              <span class="window__control"
-                ><svg><use href="assets/icons/ui.svg#close"></use></svg
-              ></span>
+              <a class="window__control" href="index.html" aria-label="Close window and go to the desktop"><svg aria-hidden="true" focusable="false"><use href="assets/icons/ui.svg#close"></use></svg></a>
             </div>
           </div>
           <div class="browser-bar" aria-hidden="true">
@@ -97,7 +101,7 @@
             <div class="browser-bar__address">
               <svg><use href="assets/icons/ui.svg#globe"></use></svg>
               <span class="browser-bar__url"
-                >https://www.alenie.dk/portfolio/about</span
+                >https://www.alenie.dk/about</span
               >
               <svg class="browser-bar__star">
                 <use href="assets/icons/ui.svg#star"></use>
@@ -108,19 +112,33 @@
           <div class="window__body">
             <h1>Hello, I’m Alexandra</h1>
             <p>
-              I’m Danish and I grew up in Frederiksberg, Denmark (located in the
-              heart of Copenhagen). In the summer of 2025 I moved to France, and
-              now I’m living in Montrouge.
+              I’m a multimedia designer in training. I work across branding,
+              UX/UI and front-end code – from the first concept and visual
+              identity to a website I design and build myself.
             </p>
             <p>
-              I’m studying Multimedia Design online at IBA Kolding, a programme
-              that combines visual design, user experience and development.
-              Through my studies, I’ve learned how to bring ideas to life – from
-              developing concepts and visual identities to designing and
-              building websites.
+              I study Multimedia Design online at IBA Kolding, a programme that
+              combines visual design, user experience and development. I grew up
+              in Frederiksberg in the heart of Copenhagen, and in the summer of
+              2025 I moved to France.
             </p>
+
+            <dl class="about__facts">
+              <div>
+                <dt>Looking for</dt>
+                <dd>An internship in France, 4 January – 24 March 2027</dd>
+              </div>
+              <div>
+                <dt>Based in</dt>
+                <dd>Montrouge, Paris area</dd>
+              </div>
+              <div>
+                <dt>Languages</dt>
+                <dd>Danish (native), English (fluent), French (A2, learning)</dd>
+              </div>
+            </dl>
+
             <p>
-              I’m looking for an internship from January 4 to March 24 2027.
               Take a look at <a href="work.html">my work</a> or
               <a href="contact.html">get in touch</a>.
             </p>
@@ -141,6 +159,16 @@
                 >Download CV (PDF)</a
               >
             </div>
+
+            <section class="about__fr" lang="fr" aria-labelledby="about-fr">
+              <h2 id="about-fr">En bref</h2>
+              <p>
+                Je suis étudiante danoise en design multimédia (IBA Kolding) et
+                j’habite à Montrouge. Je cherche un stage du 4 janvier au 24 mars
+                2027 en branding, UX/UI ou développement front-end. Je travaille
+                en anglais et j’apprends le français (niveau A2).
+              </p>
+            </section>
           </div>
         </div>
       </div>

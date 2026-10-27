@@ -28,10 +28,29 @@
 // 1. Fonts (saved in assets/fonts, so we don't load them from Google)
 // ==========================================================
 
-// Lato for the Phishing Awareness case (loaded from Google Fonts)
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;800;900&display=swap');
+// Lato for the Phishing Awareness case (SIL Open Font License, see assets/fonts/lato-OFL-license.txt)
+@font-face {
+  font-family: "Lato";
+  src: url("../assets/fonts/lato-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
 
-/* Newson fonts supplied by the portfolio owner. Add the two original font files to assets/fonts/. */
+@font-face {
+  font-family: "Lato";
+  src: url("../assets/fonts/lato-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("../assets/fonts/lato-900.woff2") format("woff2");
+  font-weight: 900;
+  font-display: swap;
+}
+
+// Newson for the GLS AI Playbook case (licensed font, files supplied by me)
 @font-face {
   font-family: "Newson";
   src: url("../assets/fonts/Newson-Regular.ttf") format("truetype");
@@ -381,7 +400,8 @@ body {
   font-weight: 700;
 }
 
-// The minimise / maximise / close squares (decoration only)
+// The minimise / maximise / close squares.
+// Minimise and maximise are decoration; close is a real link back to the desktop.
 .window__controls {
   display: flex;
   gap: 2px;
@@ -400,6 +420,10 @@ body {
     width: 16px;
     height: 16px;
   }
+}
+
+a.window__control:active {
+  @include bevel-inset;
 }
 
 .window__body {
@@ -604,6 +628,27 @@ body {
   margin-top: 1rem;
 }
 
+// Windows 98 message box (made by showMessage() in classes.js)
+.dialog-98 {
+  width: min(90vw, 22rem);
+  margin: auto; // centre it again (the reset at the top sets margin: 0)
+  padding: 4px;
+  border: 0;
+  @include bevel($win-frame);
+
+  &::backdrop {
+    background: rgb(0 0 0 / 0.3);
+  }
+
+  .window__body {
+    display: grid;
+    gap: 1rem;
+    justify-items: center;
+    font-size: 1rem;
+    text-align: center;
+  }
+}
+
 
 // ==========================================================
 // 8. Desktop icons (folders, files, apps)
@@ -617,7 +662,6 @@ body {
   width: 7rem;
   text-align: center;
   text-decoration: none;
-  cursor: default;
 
   &:focus-visible {
     outline: none;
@@ -650,7 +694,7 @@ body {
   text-shadow: 0 0 6px $white, 0 0 2px $white;
 }
 
-// Selected icon (after one click) and keyboard focus: blue label like Windows
+// Selected icon (hover or keyboard focus): blue label like Windows
 .desktop-icon.is-selected .desktop-icon__label,
 .desktop-icon:focus-visible .desktop-icon__label {
   color: $white;
@@ -751,15 +795,27 @@ body {
   .icon-vscode { @include figma-position(1087, 701, 87, 858); }
 }
 
-.home__hint {
-  font-size: 0.875rem;
-  text-align: center;
+// "Welcome" box: who I am and a way to my work.
+// Phone/tablet: under the monitor. Desktop: pops up over the monitor's stand.
+.home__intro {
+  width: min(100%, 30rem);
+  margin: 0 auto;
 
   @include desktop {
-    position: absolute;
-    bottom: 0;
-    left: 1rem;
-    text-shadow: 0 0 6px $white;
+    @include figma-position(450, 500, 540, 858);
+    margin: 0;
+  }
+
+  .window__title {
+    font-size: 1rem;
+  }
+
+  .window__body {
+    display: grid;
+    gap: 0.75rem;
+    justify-items: start;
+    font-size: 1rem;
+    line-height: 1.4;
   }
 }
 
@@ -806,6 +862,51 @@ body {
   }
 }
 
+// Looking for / Based in / Languages
+.about__facts {
+  display: grid;
+  gap: 0.4rem;
+  max-width: 42rem;
+  margin-top: 1em;
+  padding: 0.75rem 0;
+  border-block: 1px solid #d4d3d3;
+
+  div {
+    display: grid;
+    gap: 0 1rem;
+
+    @include tablet {
+      grid-template-columns: 8rem 1fr;
+    }
+  }
+
+  dt {
+    font-weight: 600;
+  }
+
+  dd {
+    margin: 0;
+  }
+}
+
+// Short summary in French
+.about__fr {
+  max-width: 42rem;
+  margin-top: 1.5rem;
+  padding-top: 0.75rem;
+  font-size: 0.9em;
+  border-top: 1px dotted $win-dark;
+
+  h2 {
+    font-size: inherit;
+    font-weight: 600;
+  }
+
+  p {
+    margin-top: 0.25em;
+  }
+}
+
 
 // ==========================================================
 // 12. Work (Figma frame "Desktop - portfolio work")
@@ -837,6 +938,7 @@ body {
 .work__browser {
   @include desktop {
     @include figma-position(43, 70, 864, 800, 643);
+    z-index: 1; // in front of the Paint window (it comes first in the HTML)
   }
 }
 
@@ -857,19 +959,65 @@ body {
     text-align: left;
   }
 
-  .desktop-icon__image {
-    width: min(100%, 11rem);
-  }
-
   .desktop-icon__label {
     font-size: inherit;
     text-shadow: none;
   }
 }
 
-.folder-list__soon {
+// Folder with a preview of the project peeking out of the top
+.folder-icon {
+  position: relative;
+  display: block;
+  width: min(100%, 11rem);
+  padding-top: 18%; // room for the preview above the folder
+
+  .desktop-icon__image {
+    position: relative; // stays in front of the preview
+    width: 100%;
+  }
+}
+
+.folder-icon__preview {
+  position: absolute;
+  top: 6%;
+  left: 18%;
+  width: 60%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: top;
+  border: 2px solid $white;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.3);
+  transform: rotate(-5deg);
+  transition: transform 0.15s;
+}
+
+// The preview slides up a little when the folder is selected
+.desktop-icon.is-selected .folder-icon__preview,
+.desktop-icon:focus-visible .folder-icon__preview {
+  opacity: 1;
+  transform: rotate(-2deg) translateY(-12%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .folder-icon__preview {
+    transition: none;
+  }
+}
+
+.folder-list__soon,
+.folder-list__tag {
   display: block;
   font-size: 0.8em;
+}
+
+.folder-list__tag {
+  color: #555; // darker than $win-dark, so small text keeps 4.5:1 contrast
+}
+
+.desktop-icon.is-selected .folder-list__tag,
+.desktop-icon:focus-visible .folder-list__tag {
+  color: inherit;
 }
 
 
@@ -885,6 +1033,8 @@ body {
   }
 }
 
+// The panel comes first in the HTML (phones see the tools first);
+// on desktop the Paint window is placed in the left column.
 .toolbox__paint {
   margin: 1.25rem 1rem;
   aspect-ratio: 901 / 778;
@@ -892,6 +1042,8 @@ body {
   @include desktop {
     position: relative;
     z-index: 1;
+    grid-row: 1;
+    grid-column: 1;
     margin: 37px -100px 0 36px;
   }
 }
@@ -902,7 +1054,13 @@ body {
   background: $green;
 
   @include desktop {
+    grid-row: 1;
+    grid-column: 2;
     padding: 71px 70px 3rem 120px;
+  }
+
+  a {
+    color: inherit;
   }
 
   h1 {
@@ -950,6 +1108,18 @@ body {
   }
 }
 
+// "OVIO · GLS": the cases where I used the tool
+.tool__used {
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+
+// How I use AI (text instead of three chatbot logos)
+.toolbox__ai {
+  max-width: 26rem;
+  line-height: 1.4;
+}
+
 // Logos that need a white tile behind them
 .tool--tile img {
   padding: 16%;
@@ -973,6 +1143,16 @@ body {
     @include figma-position(338, 58, 864, 760, 643);
   }
 
+  h1 {
+    margin-bottom: 0.5rem;
+    font-size: 1.25em;
+    font-weight: 600;
+  }
+
+  p + p {
+    margin-top: 0.75em;
+  }
+
   h2 {
     margin-top: 1.5rem;
     font-size: inherit;
@@ -986,8 +1166,9 @@ body {
 
 
 // ==========================================================
-// 15. Case pages (ovio.html, garn-og-craft.html)
-// Each case has its own colours and fonts from its brand.
+// 15. Case pages (ovio, garn-og-craft, gls-ai-playbook, phishing-awareness)
+// All four use the same template. Each case has its own colours
+// and fonts from its brand, set with the variables below.
 // ==========================================================
 
 .case--ovio {
@@ -1006,6 +1187,27 @@ body {
   --case-accent-2: #40312e;
   --case-heading-font: "Merriweather Sans", sans-serif;
   --case-body-font: "Roboto", sans-serif;
+}
+
+.case--gls {
+  --case-bg: #fff;
+  --case-text: #111;
+  --case-accent: #111;
+  --case-accent-2: #2134da;
+  --case-rule: #2134da;
+  --case-heading-font: "Newson", "DM Sans", sans-serif; // falls back to DM Sans without the Newson files
+  --case-body-font: "Newson", "DM Sans", sans-serif;
+}
+
+.case--phishing {
+  --case-bg: #102636;
+  --case-text: #fff;
+  --case-accent: #fff;
+  --case-accent-2: #f0a56b;
+  --case-rule: #d88949;
+  --case-label: #fff;
+  --case-heading-font: "Lato", Arial, sans-serif;
+  --case-body-font: "Lato", Arial, sans-serif;
 }
 
 .case {
@@ -1035,7 +1237,7 @@ body {
   font-family: $font-text;
   font-size: 1.25rem;
   font-weight: 400;
-  color: $black;
+  color: var(--case-label, #{$black});
 }
 
 // Columns: stacked on phones, side by side on desktop
@@ -1114,15 +1316,15 @@ body {
   }
 }
 
-// Role / Subject / Year
+// Team / Role / Subject / Year
 .case-meta {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
   gap: 1rem;
   padding: 0.9rem 0;
   font-size: 0.875rem;
-  border-top: 1px solid;
-  border-bottom: 1px solid;
+  border-top: 1px solid var(--case-rule, currentColor);
+  border-bottom: 1px solid var(--case-rule, currentColor);
 
   dt {
     font-family: var(--case-heading-font);
@@ -1193,6 +1395,28 @@ body {
 .case-figure figcaption {
   margin-bottom: 0.5rem;
   font-family: var(--case-heading-font);
+}
+
+.case-figure--small {
+  max-width: 20rem;
+}
+
+// Screenshots of pages and screens (GLS + Phishing)
+.case-shot {
+  width: 100%;
+  border-radius: 9px;
+}
+
+// Several screens side by side
+.case-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  align-items: start;
+}
+
+.case-gallery--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 // Logos exported with a white background: "multiply" hides the white
@@ -1312,44 +1536,3 @@ body {
     text-decoration: none;
   }
 }
-
-/* GLS and Phishing: preserve the original case-study artwork exactly.
-   The same .case wrapper and .case-pager are used by OVIO and Garn & Craft. */
-.original-case__pages { display: grid; gap: 1.25rem; }
-.original-case__figure { margin: 0; }
-.original-case__figure img { display: block; width: 100%; height: auto; }
-.original-case .case-pager { color: #000; }
-@media (max-width: 767px) { .original-case__pages { gap: .75rem; } }
-
-
-/* Hand-built, semantic GLS and phishing case studies inspired by the supplied layouts. */
-.case--gls {--case-bg:#fff;--case-text:#111;--case-accent:#111;--case-heading-font:"DM Sans",sans-serif;--case-body-font:"DM Sans",sans-serif;--rule:#2134da}
-.case--phishing {--case-bg:#102636;--case-text:#fff;--case-accent:#fff;--case-heading-font:"DM Sans",sans-serif;--case-body-font:"DM Sans",sans-serif;--rule:#d88949}
-.rebuild-card {border-radius:32px; padding:clamp(20px,3vw,34px);margin-bottom:1.5rem}
-.rebuild-layout {display:grid;grid-template-columns:minmax(0, .82fr) minmax(0,1.18fr);gap:clamp(24px,3vw,48px);align-items:start}
-.rebuild-copy,.rebuild-visuals {min-width:0;display:grid;gap:1.1rem}
-.rebuild-copy h1 {font-size:clamp(1.35rem,2vw,2rem);line-height:1.15;font-weight:750}
-.rebuild-lede {font-size:clamp(1.05rem,1.4vw,1.4rem);font-weight:600;line-height:1.25}
-.rebuild-card .case-text {line-height:1.36;font-size:clamp(.95rem,1.2vw,1.1rem)}
-.rebuild-card .case-text h2,.rebuild-tools h2 {font-size:1.13rem;line-height:1.3;font-weight:750;margin-bottom:.15rem}
-.rebuild-meta {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;border-top:1px solid var(--rule);padding-top:.5rem}
-.rebuild-meta dt {font-weight:700}.rebuild-meta dd {margin:0;font-size:.92rem;line-height:1.3}
-.rebuild-tools {border-block:1px solid var(--rule);padding:.55rem 0}.rebuild-tools ul {display:flex;gap:.65rem;flex-wrap:wrap;margin-top:.6rem}.rebuild-tools img {width:37px;height:37px;object-fit:contain}
-.rebuild-gallery {display:grid;gap:.6rem}.rebuild-gallery--gls {grid-template-columns:repeat(2,minmax(0,1fr))}
-.rebuild-figure {margin:0;min-width:0}.rebuild-figure img {display:block;width:100%;height:auto;border-radius:9px}.rebuild-figure figcaption {font-size:.88rem;margin-top:.25rem}
-.rebuild-visuals--phishing {gap:1.3rem}.rebuild-layout--process {grid-template-columns:1.05fr .95fr}
-.rebuild-flow img {width:100%;max-height:900px;object-fit:contain;object-position:top;background:#ddd}
-.rebuild-layout--process .rebuild-visuals>.rebuild-figure {max-width:300px}
-.case--phishing .case-pager {color:#111}
-@media(max-width:850px){.rebuild-layout,.rebuild-layout--process{grid-template-columns:1fr}.rebuild-copy{gap:1rem}.rebuild-layout--process .rebuild-visuals>.rebuild-figure{max-width:300px}}
-@media(max-width:480px){.rebuild-meta{grid-template-columns:1fr 1fr}.rebuild-card{border-radius:20px}.rebuild-gallery--gls{gap:.4rem}}
-
-/* Project typography overrides. Newson requires a separately licensed font file. */
-.case--gls .rebuild-card {font-family: "Newson", "DM Sans", sans-serif;}
-.case--phishing .rebuild-card {font-family: "Lato", Arial, sans-serif;}
-.case--gls .rebuild-card :is(h1,h2,p,dt,dd), .case--phishing .rebuild-card :is(h1,h2,p,dt,dd) {font-family:inherit;}
-
-/* Full-resolution, individually extracted PDF images for the phishing sequence. */
-.phishing-screens { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.6rem; align-items:start; }
-.phishing-screens .rebuild-figure img {width:100%;height:auto;object-fit:contain;}
-@media(max-width:480px){.phishing-screens{gap:.3rem}}

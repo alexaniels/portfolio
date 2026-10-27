@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Toolbox – Alexandra Nielsen</title>
   <meta name="description" content="The design, development and AI tools Alexandra Nielsen works with.">
+  <!-- Preview when the link is shared (LinkedIn, Slack, …) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Alexandra Nielsen – Portfolio">
+  <meta property="og:title" content="Toolbox – Alexandra Nielsen">
+  <meta property="og:description" content="The design, development and AI tools Alexandra Nielsen works with.">
+  <meta property="og:url" content="https://alenie.dk/toolbox.html">
+  <meta property="og:image" content="https://alenie.dk/assets/img/home/monitor-portfolio.png">
+  <meta property="og:image:alt" content="A retro computer monitor with the word PORTFOLIO on a Windows XP background">
   <link rel="icon" href="assets/icons/favicon.png">
   <link rel="stylesheet" href="css/style.css">
   <script type="module" src="js/main.js"></script>
@@ -29,15 +37,50 @@
   <main id="main">
     <div class="toolbox">
 
-      <!-- Paint window with the toolbox drawing -->
+      <!-- Green panel with the tools (first, so phones see it before the drawing) -->
+      <section class="toolbox__panel">
+        <h1>Tools and technologies</h1>
+        <p>As a multimedia design student I use a broad mix of design, development and AI tools to create digital solutions. Under each tool you can see the case studies where I used it.</p>
+
+        <h2>Design &amp; branding</h2>
+        <ul class="tool-list">
+          <li class="tool tool--tile"><img src="assets/icons/tools/figma.png" alt="" width="90" height="90">Figma<span class="tool__used"><a href="work.html">All 4 cases</a></span></li>
+          <li class="tool"><img src="assets/icons/tools/illustrator.png" alt="" width="90" height="90">Adobe Illustrator</li>
+          <li class="tool"><img src="assets/icons/tools/indesign.png" alt="" width="90" height="90">Adobe InDesign<span class="tool__used"><a href="ovio.html">OVIO</a> · <a href="gls-ai-playbook.html">GLS</a></span></li>
+          <li class="tool"><img src="assets/icons/tools/photoshop.png" alt="" width="90" height="90">Adobe Photoshop</li>
+          <li class="tool"><img src="assets/icons/tools/procreate.png" alt="" width="90" height="90">Procreate</li>
+          <li class="tool"><img src="assets/icons/tools/canva.png" alt="" width="90" height="90">Canva<span class="tool__used"><a href="garn-og-craft.html">Garn</a> · <a href="phishing-awareness.html">Phishing</a></span></li>
+        </ul>
+
+        <h2>Motion &amp; video</h2>
+        <ul class="tool-list">
+          <li class="tool"><img src="assets/icons/tools/after-effects.png" alt="" width="90" height="90">Adobe After Effects<span class="tool__used"><a href="ovio.html">OVIO</a></span></li>
+          <li class="tool"><img src="assets/icons/tools/premiere-pro.png" alt="" width="90" height="90">Adobe Premiere Pro</li>
+        </ul>
+
+        <h2>Web &amp; code</h2>
+        <ul class="tool-list">
+          <li class="tool"><img src="assets/icons/tools/html.png" alt="" width="90" height="90">HTML<span class="tool__used"><a href="garn-og-craft.html">Garn</a> · <a href="phishing-awareness.html">Phishing</a> · this site</span></li>
+          <li class="tool"><img src="assets/icons/tools/css.svg" alt="" width="90" height="90">CSS<span class="tool__used"><a href="garn-og-craft.html">Garn</a> · this site</span></li>
+          <li class="tool"><img src="assets/icons/tools/scss.png" alt="" width="90" height="90">SCSS<span class="tool__used"><a href="phishing-awareness.html">Phishing</a> · this site</span></li>
+          <li class="tool"><img src="assets/icons/tools/javascript.png" alt="" width="90" height="90">JavaScript<span class="tool__used"><a href="phishing-awareness.html">Phishing</a> · this site</span></li>
+          <li class="tool"><img src="assets/icons/tools/github.png" alt="" width="90" height="90">GitHub<span class="tool__used"><a href="garn-og-craft.html">Garn</a> · <a href="phishing-awareness.html">Phishing</a></span></li>
+          <li class="tool"><img src="assets/icons/tools/wordpress.png" alt="" width="90" height="90">WordPress<span class="tool__used"><a href="ovio.html">OVIO</a></span></li>
+        </ul>
+
+        <h2>AI</h2>
+        <p class="toolbox__ai">I use AI assistants such as Claude, ChatGPT and Gemini for research, feedback on my writing and help with debugging. I check and rewrite what they give me, and I keep a log of how AI was used in my projects.</p>
+      </section>
+
+      <!-- Paint window with the toolbox drawing (decoration) -->
       <div class="window window--paint toolbox__paint">
-        <div class="window__titlebar" aria-hidden="true">
+        <div class="window__titlebar">
           <img src="assets/img/paint/paint-icon.png" alt="" width="20" height="25">
-          <span class="window__title">untitled - Paint</span>
+          <span class="window__title" aria-hidden="true">untitled - Paint</span>
           <div class="window__controls">
-            <span class="window__control"><svg><use href="assets/icons/ui.svg#minimize"></use></svg></span>
-            <span class="window__control"><svg><use href="assets/icons/ui.svg#maximize"></use></svg></span>
-            <span class="window__control window__control--close"><svg><use href="assets/icons/ui.svg#close"></use></svg></span>
+            <span class="window__control" aria-hidden="true"><svg><use href="assets/icons/ui.svg#minimize"></use></svg></span>
+            <span class="window__control" aria-hidden="true"><svg><use href="assets/icons/ui.svg#maximize"></use></svg></span>
+            <a class="window__control window__control--close" href="index.html" aria-label="Close window and go to the desktop"><svg aria-hidden="true" focusable="false"><use href="assets/icons/ui.svg#close"></use></svg></a>
           </div>
         </div>
         <div class="paint__menu" aria-hidden="true">
@@ -52,41 +95,6 @@
         <img class="paint__palette" src="assets/img/paint/paint-palette.png" alt="" width="598" height="80">
         <p class="paint__status" aria-hidden="true">For Help, click Help Topics on the Help Menu.</p>
       </div>
-
-      <!-- Green panel with the tools -->
-      <section class="toolbox__panel">
-        <h1>Tools and technologies</h1>
-        <p>As a multimedia design student I use a broad mix of design, development and AI tools to create digital solutions.</p>
-
-        <h2 class="visually-hidden">Design</h2>
-        <ul class="tool-list">
-          <li class="tool tool--tile"><img src="assets/icons/tools/figma.png" alt="" width="90" height="90">Figma</li>
-          <li class="tool"><img src="assets/icons/tools/illustrator.png" alt="" width="90" height="90">Adobe Illustrator</li>
-          <li class="tool"><img src="assets/icons/tools/indesign.png" alt="" width="90" height="90">Adobe InDesign</li>
-          <li class="tool"><img src="assets/icons/tools/photoshop.png" alt="" width="90" height="90">Adobe Photoshop</li>
-          <li class="tool"><img src="assets/icons/tools/after-effects.png" alt="" width="90" height="90">Adobe After Effects</li>
-          <li class="tool"><img src="assets/icons/tools/premiere-pro.png" alt="" width="90" height="90">Adobe Premiere Pro</li>
-          <li class="tool"><img src="assets/icons/tools/canva.png" alt="" width="90" height="90">Canva</li>
-          <li class="tool"><img src="assets/icons/tools/procreate.png" alt="" width="90" height="90">Procreate</li>
-        </ul>
-
-        <h2 class="visually-hidden">Code</h2>
-        <ul class="tool-list">
-          <li class="tool"><img src="assets/icons/tools/html.png" alt="" width="90" height="90">HTML</li>
-          <li class="tool"><img src="assets/icons/tools/css.svg" alt="" width="90" height="90">CSS</li>
-          <li class="tool"><img src="assets/icons/tools/scss.png" alt="" width="90" height="90">SCSS</li>
-          <li class="tool"><img src="assets/icons/tools/javascript.png" alt="" width="90" height="90">JavaScript</li>
-          <li class="tool"><img src="assets/icons/tools/github.png" alt="" width="90" height="90">GitHub</li>
-          <li class="tool"><img src="assets/icons/tools/wordpress.png" alt="" width="90" height="90">WordPress</li>
-        </ul>
-
-        <h2 class="visually-hidden">AI</h2>
-        <ul class="tool-list">
-          <li class="tool"><img src="assets/icons/tools/gemini.png" alt="" width="90" height="90">Gemini</li>
-          <li class="tool tool--tile"><img src="assets/icons/tools/chatgpt.png" alt="" width="90" height="90">ChatGPT</li>
-          <li class="tool"><img src="assets/icons/tools/claude.png" alt="" width="90" height="90">Claude</li>
-        </ul>
-      </section>
 
     </div>
   </main>

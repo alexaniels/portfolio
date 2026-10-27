@@ -9,13 +9,14 @@ import { Project, DesktopIcon, ProjectFolder, ReadMore } from './classes.js';
 
 // ----------------------------------------------------------
 // 1. My projects (Project objects)
-// To add a project: add one line here.
+// To add a project: add one line here. The order here is the
+// order of the folders on the Work page.
 // ----------------------------------------------------------
 const projects = [
-  new Project('OVIO', 'ovio.html', 'ready'),
-  new Project('Garn & Craft', 'garn-og-craft.html', 'ready'),
-  new Project('GLS AI Playbook', 'gls-ai-playbook.html', 'ready'),
-  new Project('Cyber security scenario', 'phishing-awareness.html', 'ready'),
+  new Project('OVIO', 'ovio.html', 'ready', 'assets/img/work/folder-ovio.jpg', 'Branding + web'),
+  new Project('Garn & Craft', 'garn-og-craft.html', 'ready', 'assets/img/work/folder-garn.jpg', 'UX/UI + web'),
+  new Project('GLS AI Playbook', 'gls-ai-playbook.html', 'ready', 'assets/img/work/folder-gls.jpg', 'Editorial design'),
+  new Project('Phishing Awareness', 'phishing-awareness.html', 'ready', 'assets/img/work/folder-phishing.jpg', 'Interactive + code'),
 ];
 
 
@@ -57,18 +58,10 @@ if (yesButton && continuedSection) {
 
 
 // ----------------------------------------------------------
-// 5. Click on an empty part of the page: deselect the icon
+// 5. Home page: pause button for the scrolling welcome line
 // ----------------------------------------------------------
-document.addEventListener('click', (event) => {
-  const clickedAnIcon = event.target.closest('.desktop-icon');
-
-  if (!clickedAnIcon && DesktopIcon.selected) {
-    DesktopIcon.selected.deselect();
-  }
-});
-
-// Allow users to pause the continuously running announcement.
 const marqueeToggle = document.querySelector('.marquee__toggle');
+
 if (marqueeToggle) {
   marqueeToggle.addEventListener('click', () => {
     const marquee = marqueeToggle.closest('.marquee');

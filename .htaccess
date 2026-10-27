@@ -1,0 +1,7 @@
+# simply.com (Apache) settings for alenie.dk
+
+# Show my own Windows-style "page not found" page
+ErrorDocument 404 /404.html
+
+# Don't list the files in a folder that has no index.html
+Options -Indexes
