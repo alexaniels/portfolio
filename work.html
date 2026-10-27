@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work – Alexandra Nielsen</title>
+  <meta name="description" content="Selected work by Alexandra Nielsen: branding, UX/UI and web design case studies.">
+  <link rel="icon" href="assets/icons/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="site-header__bar">
+      <a class="site-header__name" href="index.html">Alexandra Nielsen</a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="work.html" aria-current="page">Work</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="toolbox.html">Toolbox</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="desktop work">
+
+      <!-- Paint window with the "WORK" drawing (behind) -->
+      <div class="window window--paint work__paint">
+        <div class="window__titlebar" aria-hidden="true">
+          <img src="assets/img/paint/paint-icon.png" alt="" width="20" height="25">
+          <span class="window__title">untitled - Paint</span>
+          <div class="window__controls">
+            <span class="window__control"><svg><use href="assets/icons/ui.svg#minimize"></use></svg></span>
+            <span class="window__control"><svg><use href="assets/icons/ui.svg#maximize"></use></svg></span>
+            <span class="window__control window__control--close"><svg><use href="assets/icons/ui.svg#close"></use></svg></span>
+          </div>
+        </div>
+        <div class="paint__menu" aria-hidden="true">
+          <span>File</span><span>Edit</span><span>View</span><span>Image</span><span>Colors</span><span>Help</span>
+        </div>
+        <div class="paint__workspace">
+          <img class="paint__tools" src="assets/img/paint/paint-tools.png" alt="" width="130" height="640">
+          <div class="paint__canvas">
+            <img src="assets/img/work/work-lettering.png" alt="The word WORK hand-lettered in pink." width="471" height="425">
+          </div>
+        </div>
+        <img class="paint__palette" src="assets/img/paint/paint-palette.png" alt="" width="598" height="80">
+        <p class="paint__status" aria-hidden="true">For Help, click Help Topics on the Help Menu.</p>
+      </div>
+
+      <!-- Browser window with the project folders (in front) -->
+      <div class="window work__browser">
+        <div class="window__titlebar" aria-hidden="true">
+          <div class="window__controls">
+            <span class="window__control"><svg><use href="assets/icons/ui.svg#minimize"></use></svg></span>
+            <span class="window__control"><svg><use href="assets/icons/ui.svg#maximize"></use></svg></span>
+            <span class="window__control"><svg><use href="assets/icons/ui.svg#close"></use></svg></span>
+          </div>
+        </div>
+        <div class="browser-bar" aria-hidden="true">
+          <svg><use href="assets/icons/ui.svg#back"></use></svg>
+          <svg class="is-grey"><use href="assets/icons/ui.svg#forward"></use></svg>
+          <svg><use href="assets/icons/ui.svg#home"></use></svg>
+          <div class="browser-bar__address">
+            <svg><use href="assets/icons/ui.svg#globe"></use></svg>
+            <span class="browser-bar__url">https://www.alenie.dk/portfolio/work</span>
+            <svg class="browser-bar__star"><use href="assets/icons/ui.svg#star"></use></svg>
+          </div>
+          <svg><use href="assets/icons/ui.svg#menu"></use></svg>
+        </div>
+        <div class="window__body">
+          <h1 class="visually-hidden">My work</h1>
+
+          <!-- main.js adds one folder for every project here -->
+          <ul class="folder-list"></ul>
+
+          <noscript>
+            <p><a href="ovio.html">OVIO</a> · <a href="garn-og-craft.html">Garn &amp; Craft</a> · <a href="gls-ai-playbook.html">GLS AI Playbook</a> · <a href="phishing-awareness.html">Phishing Awareness Scenario</a></p>
+          </noscript>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Alexandra Nielsen</p>
+  </footer>
+</body>
+</html>

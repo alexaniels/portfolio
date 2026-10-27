@@ -1,0 +1,91 @@
+// ==========================================================
+// _mixins.scss
+// Variables (colours, fonts, breakpoints) and mixins.
+// It is loaded at the top of style.scss with: @use "mixins" as *;
+// ==========================================================
+
+// ---------- Colours (from Figma) ----------
+$green: #2b611c;        // header line, marquee, toolbox panel
+$black: #000;
+$white: #fff;
+
+// Windows 98 colours
+$win-grey: #c0c0c0;     // buttons
+$win-light: #dfdfdf;
+$win-dark: #808080;
+$win-frame: #d4d0c8;    // window frame
+$win-blue-1: #06209a;   // title bar gradient start
+$win-blue-2: #3a7fe0;   // title bar gradient end
+$win-select: #0a246a;   // selected icon label
+
+// ---------- Fonts ----------
+$font-name: "Bricolage Grotesque", sans-serif; // "Alexandra Nielsen"
+$font-text: "DM Sans", sans-serif;              // all other text
+$font-system: Tahoma, Verdana, sans-serif;      // text inside windows
+
+// ---------- Breakpoints ----------
+$tablet: 600px;
+$desktop: 1024px;
+
+
+// ==========================================================
+// Mixins
+// ==========================================================
+
+// Media query for tablet and up
+@mixin tablet {
+  @media (min-width: $tablet) {
+    @content;
+  }
+}
+
+// Media query for desktop and up
+@mixin desktop {
+  @media (min-width: $desktop) {
+    @content;
+  }
+}
+
+// Raised Windows 98 border (buttons and window frames)
+@mixin bevel($face: $win-grey) {
+  background-color: $face;
+  box-shadow:
+    inset -1px -1px 0 #0a0a0a,
+    inset 1px 1px 0 $white,
+    inset -2px -2px 0 $win-dark,
+    inset 2px 2px 0 $win-light;
+}
+
+// Sunken Windows 98 border (address bar)
+@mixin bevel-inset {
+  background-color: $white;
+  box-shadow:
+    inset 1px 1px 0 $win-dark,
+    inset 2px 2px 0 #0a0a0a,
+    inset -1px -1px 0 $white;
+}
+
+// Hides something visually, but screen readers still read it
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+// Places an element on the desktop using the numbers from Figma.
+// $x, $y, $w, $h = pixels in the 1440px wide Figma frame.
+// $stage-h = height of the area below the header in Figma.
+// Everything becomes a percentage, so the layout scales with the screen.
+@mixin figma-position($x, $y, $w, $stage-h, $h: null) {
+  position: absolute;
+  left: calc($x / 1440 * 100%);
+  top: calc($y / $stage-h * 100%);
+  width: calc($w / 1440 * 100%);
+
+  @if $h {
+    height: calc($h / $stage-h * 100%);
+  }
+}

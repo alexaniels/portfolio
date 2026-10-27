@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alexandra Nielsen – Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio of Alexandra Nielsen, multimedia design student at IBA Kolding, looking for an internship from January 4 to March 24 2027."
+    />
+    <link rel="icon" href="assets/icons/favicon.png" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="site-header__bar">
+        <a class="site-header__name" href="index.html">Alexandra Nielsen</a>
+        <nav class="site-nav" aria-label="Main">
+          <ul>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="toolbox.html">Toolbox</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="marquee" role="region" aria-label="Portfolio announcement">
+        <p class="visually-hidden">
+          Welcome to my portfolio. I’m a multimedia design student looking for
+          an internship from 4 January to 24 March 2027. Feel free to take a
+          look.
+        </p>
+        <div class="marquee__viewport" aria-hidden="true">
+          <div class="marquee__track">
+            <span
+              >Welcome to my portfolio • I’m a multimedia design student • I’m
+              looking for an internship from January 4th – March 24th 2027 •
+              Feel free to take a look •&nbsp;</span
+            ><span
+              >Welcome to my portfolio • I’m a multimedia design student • I’m
+              looking for an internship from 4th of January – 24th of March 2027
+              • Feel free to take a look •&nbsp;</span
+            >
+          </div>
+        </div>
+        <button
+          class="marquee__toggle"
+          type="button"
+          aria-label="Pause scrolling announcement"
+          aria-pressed="false"
+        >
+          Pause
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="desktop home">
+        <h1 class="home__monitor">
+          <img
+            src="assets/img/home/monitor-portfolio.png"
+            alt="Portfolio – Alexandra Nielsen"
+            width="1012"
+            height="931"
+          />
+        </h1>
+
+        <!-- The desktop icons. main.js makes them work with double-click. -->
+        <ul class="home__icons">
+          <li>
+            <a class="desktop-icon icon-work" href="work.html">
+              <img
+                class="desktop-icon__image"
+                src="assets/icons/desktop/folder.png"
+                alt=""
+                width="128"
+                height="128"
+              />
+              <span class="desktop-icon__label">Work</span>
+            </a>
+          </li>
+          <li>
+            <a class="desktop-icon icon-ovio" href="ovio.html">
+              <img
+                src="assets/img/cases/ovio/ovio-moodboard.jpg"
+                alt=""
+                width="922"
+                height="518"
+              />
+              <span class="desktop-icon__label">OVIO moodboard.png</span>
+            </a>
+          </li>
+          <li>
+            <a class="desktop-icon icon-illustrator" href="toolbox.html">
+              <img
+                class="desktop-icon__image"
+                src="assets/icons/desktop/illustrator.png"
+                alt=""
+                width="70"
+                height="70"
+              />
+              <span class="visually-hidden">Adobe Illustrator</span>
+            </a>
+          </li>
+          <li>
+            <a class="desktop-icon icon-toolbox" href="toolbox.html">
+              <img
+                class="desktop-icon__image"
+                src="assets/icons/desktop/folder.png"
+                alt=""
+                width="128"
+                height="128"
+              />
+              <span class="desktop-icon__label">Toolbox</span>
+            </a>
+          </li>
+          <li>
+            <a class="desktop-icon icon-gls" href="gls-ai-playbook.html">
+              <img
+                src="assets/img/home/gls-playbook-thumb.png"
+                alt=""
+                width="140"
+                height="99"
+              />
+              <span class="desktop-icon__label">GLS AI Playbook.pdf</span>
+            </a>
+          </li>
+          <li>
+            <a class="desktop-icon icon-about" href="about.html">
+              <img
+                class="desktop-icon__image"
+                src="assets/icons/desktop/folder.png"
+                alt=""
+                width="128"
+                height="128"
+              />
+              <span class="desktop-icon__label">About</span>
+            </a>
+          </li>
+          <li>
+            <a class="desktop-icon icon-figma" href="toolbox.html">
+              <span class="desktop-icon__tile"
+                ><img
+                  src="assets/icons/desktop/figma.png"
+                  alt=""
+                  width="43"
+                  height="43"
+              /></span>
+              <span class="visually-hidden">Figma</span>
+            </a>
+          </li>
+          <li>
+            <a class="desktop-icon icon-garn" href="garn-og-craft.html">
+              <img
+                src="assets/img/cases/garn-og-craft/gc-moodboard.jpg"
+                alt=""
+                width="608"
+                height="760"
+              />
+              <span class="desktop-icon__label">Garnogcraft-moodboard.png</span>
+            </a>
+          </li>
+          <li>
+            <a class="desktop-icon icon-vscode" href="toolbox.html">
+              <img
+                class="desktop-icon__image"
+                src="assets/icons/desktop/vscode.png"
+                alt=""
+                width="87"
+                height="87"
+              />
+              <span class="visually-hidden">Visual Studio Code</span>
+            </a>
+          </li>
+        </ul>
+
+        <p class="home__hint">Tip: double-click an icon to open it.</p>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Alexandra Nielsen</p>
+    </footer>
+  </body>
+</html>

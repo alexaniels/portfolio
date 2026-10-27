@@ -1,0 +1,1266 @@
+/* Newson fonts supplied by the portfolio owner. Add the two original font files to assets/fonts/. */
+@font-face {
+  font-family: "Newson";
+  src: url("../assets/fonts/Newson-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newson";
+  src: url("../assets/fonts/Newson-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;800;900&display=swap');
+// ==========================================================
+// style.scss — all styles for the portfolio
+// Compiled to css/style.css by Live Sass Compiler.
+//
+// Contents
+//  1. Fonts
+//  2. Base
+//  3. Background
+//  4. Header + marquee
+//  5. Footer
+//  6. Windows (browser + Paint)
+//  7. Buttons
+//  8. Desktop icons
+//  9. Desktop layout
+// 10. Home
+// 11. About
+// 12. Work
+// 13. Toolbox
+// 14. Contact
+// 15. Case pages
+// 16. 404
+// ==========================================================
+
+@use "mixins" as *;
+
+
+// ==========================================================
+// 1. Fonts (saved in assets/fonts, so we don't load them from Google)
+// ==========================================================
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("../assets/fonts/dm-sans-variable.woff2") format("woff2");
+  font-weight: 100 1000;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("../assets/fonts/bricolage-grotesque-variable.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Share Tech Mono";
+  src: url("../assets/fonts/share-tech-mono-400.woff2") format("woff2");
+  font-display: swap;
+}
+
+// Fonts used on the case pages
+@font-face {
+  font-family: "Lexend Giga";
+  src: url("../assets/fonts/lexend-giga-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Lexend";
+  src: url("../assets/fonts/lexend-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rubik Spray Paint";
+  src: url("../assets/fonts/rubik-spray-paint-400.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Merriweather Sans";
+  src: url("../assets/fonts/merriweather-sans-variable.woff2") format("woff2");
+  font-weight: 300 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/roboto-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+
+// ==========================================================
+// 2. Base
+// ==========================================================
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: $font-text;
+  line-height: 1.5;
+  color: $black;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+// Visible focus for keyboard users
+:focus-visible {
+  outline: 3px solid $black;
+  outline-offset: 2px;
+}
+
+// "Skip to content" link, only visible when you tab to it
+.skip-link {
+  @include bevel;
+  position: absolute;
+  top: -100px;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+
+  &:focus {
+    top: 0.5rem;
+  }
+}
+
+
+// ==========================================================
+// 3. Background
+// One picture exported from Figma (the background of the frame).
+// ==========================================================
+
+body {
+  background-color: #e8c9b5;                                  // shown while the picture loads
+  background-image: url("../assets/img/bg/background-mobile.jpg"); // smaller file for phones
+  background-position: center;                                // keep the middle of the picture in view
+  background-size: cover;                                     // always fill the area, never stretched
+
+  // Desktop: bigger, sharper picture that stays still when you scroll.
+  // ("fixed" is only used on desktop, because phones handle it badly.)
+  @include desktop {
+    background-image: url("../assets/img/bg/background.jpg");
+    background-attachment: fixed;
+  }
+}
+
+
+// ==========================================================
+// 4. Header + marquee
+// ==========================================================
+
+.site-header {
+  padding-top: 1rem;
+
+  @include desktop {
+    padding-top: 51px;
+  }
+}
+
+.site-header__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid $green;
+  border-left: 0;
+
+  @include desktop {
+    min-height: 72px;
+    padding: 0 20px 0 94px;
+  }
+}
+
+.site-header__name {
+  font-family: $font-name;
+  font-size: 1.5rem;
+  line-height: 1;
+  text-decoration: none;
+
+  @include desktop {
+    font-size: 34px;
+  }
+}
+
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+
+  @include desktop {
+    gap: 66px;
+  }
+}
+
+.site-nav a {
+  font-size: 1.125rem;
+  text-decoration: none;
+
+  @include desktop {
+    font-size: 34px;
+  }
+
+  // Underline on hover and on the page you are on
+  &:hover,
+  &[aria-current="page"] {
+    text-decoration: underline;
+    text-decoration-color: $green;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.15em;
+  }
+}
+
+// Green welcome line on the home page
+.marquee {
+  padding: 0.5rem 1rem;
+  color: $white;
+  background: $green;
+
+  @include desktop {
+    padding: 0.6rem 0;
+    font-size: 20px;
+    line-height: 1;
+  }
+}
+
+
+// ==========================================================
+// 5. Footer
+// ==========================================================
+
+.site-footer {
+  padding: 1.5rem 1rem 0.5rem;
+  text-align: right;
+
+  @include desktop {
+    font-size: 20px;
+  }
+}
+
+
+// ==========================================================
+// 6. Windows (rebuilt in CSS from the Figma images)
+// ==========================================================
+
+.window {
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  font-family: $font-system;
+  @include bevel($win-frame);
+}
+
+.window__titlebar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 30px;
+  padding: 3px 3px 3px 0.5rem;
+  color: $white;
+  background: linear-gradient(90deg, $win-blue-1, $win-blue-2);
+}
+
+.window__title {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+// The minimise / maximise / close squares (decoration only)
+.window__controls {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.window__control {
+  @include bevel;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  color: $black;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.window__body {
+  flex: 1;
+  margin-top: 4px;
+  padding: 1rem;
+  overflow: auto;
+  font-family: $font-text;
+  background: $white;
+  border: 1px solid #d4d3d3;
+
+  @include desktop {
+    font-size: 20px;
+  }
+}
+
+// Browser toolbar: back, forward, home, address bar, menu
+.browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 6px 4px 4px 8px;
+
+  svg {
+    flex: none;
+    width: 22px;
+    height: 22px;
+  }
+
+  .is-grey {
+    color: $win-dark;
+  }
+}
+
+.browser-bar__address {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  min-height: 34px;
+  padding: 2px 8px;
+  @include bevel-inset;
+}
+
+.browser-bar__url {
+  flex: 1;
+  overflow: hidden;
+  font-family: $font-text;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.browser-bar__star {
+  color: #1a5cff;
+}
+
+// --- Paint window (Windows XP style) ---
+
+.window--paint {
+  padding: 0;
+  background: #ece9d8;
+  border: 3px solid #0831d9;
+  border-top: 0;
+  border-radius: 8px 8px 0 0;
+  box-shadow: none;
+
+  .window__titlebar {
+    min-height: 40px;
+    background: linear-gradient(180deg, #0997ff, #0053ee 10%, #06f 90%, #003dd7);
+    border-radius: 8px 8px 0 0;
+  }
+
+  .window__title {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 1.25rem;
+    text-shadow: 1px 1px 0 #0f1089;
+  }
+
+  .window__control {
+    color: $white;
+    background: linear-gradient(180deg, #5b93ff, #1a5cff);
+    border: 1px solid $white;
+    border-radius: 4px;
+    box-shadow: none;
+  }
+
+  .window__control--close {
+    background: linear-gradient(180deg, #e98d6e, #d1431c);
+  }
+}
+
+.paint__menu {
+  display: flex;
+  gap: 1.25rem;
+  padding: 0.3rem 0.75rem;
+  border-bottom: 1px solid #aca899;
+}
+
+.paint__workspace {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.paint__tools {
+  width: auto;
+  max-width: 13%;
+  height: 100%;
+  padding: 0.35rem;
+  object-fit: contain;
+  object-position: top;
+}
+
+// White drawing area with a grey edge
+.paint__canvas {
+  display: grid;
+  flex: 1;
+  place-items: center;
+  min-width: 0;
+  background: $white;
+  border: 0.75rem solid $win-dark;
+
+  img {
+    max-height: 100%;
+    object-fit: contain;
+  }
+}
+
+.paint__palette {
+  flex: none;
+  width: 66%;
+  margin: 0.35rem 0.5rem;
+}
+
+.paint__status {
+  padding: 0.3rem 0.5rem;
+  border-top: 1px solid #aca899;
+}
+
+
+// ==========================================================
+// 7. Buttons (Windows 98 button from the Figma case pages)
+// ==========================================================
+
+.btn-98 {
+  display: inline-grid;
+  place-items: center;
+  min-width: 10rem;
+  min-height: 3.5rem;
+  padding: 0.5rem 1.25rem;
+  font-family: $font-text;
+  font-size: 1.125rem;
+  line-height: 1.1;
+  color: $black;
+  text-align: center;
+  text-decoration: none;
+  background: $win-grey;
+  // white top/left, black bottom/right = raised button
+  border-style: solid;
+  border-width: 5px 6px 7px 6px;
+  border-color: $white $black $black $white;
+
+  @include desktop {
+    min-width: 240px;
+    min-height: 86px;
+    font-size: 20px;
+  }
+
+  &:hover {
+    background: $win-light;
+  }
+
+  // pressed
+  &:active,
+  &[aria-expanded="true"] {
+    border-color: $black $white $white $black;
+  }
+}
+
+
+// ==========================================================
+// 8. Desktop icons (folders, files, apps)
+// ==========================================================
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  width: 7rem;
+  text-align: center;
+  text-decoration: none;
+  cursor: default;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.desktop-icon img {
+  width: 100%;
+}
+
+// White rounded tile behind the Figma logo
+.desktop-icon__tile {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1;
+  background: $white;
+  border-radius: 17%;
+
+  img {
+    width: 62%;
+  }
+}
+
+.desktop-icon__label {
+  padding: 0 0.25rem;
+  font-size: 1rem;
+  line-height: 1.1;
+  // white glow so the label is readable on the busy background
+  text-shadow: 0 0 6px $white, 0 0 2px $white;
+}
+
+// Selected icon (after one click) and keyboard focus: blue label like Windows
+.desktop-icon.is-selected .desktop-icon__label,
+.desktop-icon:focus-visible .desktop-icon__label {
+  color: $white;
+  text-shadow: none;
+  background: $win-select;
+  outline: 1px dotted $white;
+}
+
+.desktop-icon.is-selected img,
+.desktop-icon:focus-visible img {
+  opacity: 0.75;
+}
+
+
+// ==========================================================
+// 9. Desktop layout
+// Phone/tablet: everything is stacked.
+// Desktop: windows and icons are placed like in Figma
+// (see the figma-position mixin in _mixins.scss).
+// ==========================================================
+
+.desktop {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.25rem 1rem;
+
+  @include desktop {
+    position: relative;
+    display: block;
+    padding: 0;
+  }
+}
+
+// On phones the windows get a fixed height, so the text can scroll inside
+.desktop .window {
+  max-height: 80vh;
+
+  @include desktop {
+    max-height: none;
+  }
+}
+
+
+// ==========================================================
+// 10. Home (Figma frame "Desktop - portfolio frontpage")
+// Stage below the marquee is 858px high in Figma.
+// ==========================================================
+
+.home {
+  @include desktop {
+    aspect-ratio: 1440 / 858;
+  }
+}
+
+.home__monitor {
+  width: min(100%, 36rem);
+  margin: 0 auto;
+
+  @include desktop {
+    @include figma-position(313, -16, 814, 858);
+  }
+}
+
+.home__icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+  gap: 1.5rem 0.5rem;
+  justify-items: center;
+
+  // On desktop the icons are placed one by one (below)
+  @include desktop {
+    display: contents;
+
+    li {
+      display: contents;
+    }
+  }
+}
+
+// Smaller app icons on phones
+.icon-illustrator,
+.icon-figma,
+.icon-vscode {
+  width: 4.5rem;
+}
+
+// Positions from Figma: x, y, width (only on desktop)
+@include desktop {
+  .icon-work { @include figma-position(91, 55, 128, 858); }
+  .icon-ovio { @include figma-position(29, 233, 150, 858); }
+  .icon-illustrator { @include figma-position(193, 409, 70, 858); }
+  .icon-toolbox { @include figma-position(164, 553, 128, 858); }
+  .icon-gls { @include figma-position(326, 696, 140, 858); }
+  .icon-about { @include figma-position(1185, 76, 128, 858); }
+  .icon-figma { @include figma-position(1270, 328, 70, 858); }
+  .icon-garn { @include figma-position(1164, 489, 135, 858); }
+  .icon-vscode { @include figma-position(1087, 701, 87, 858); }
+}
+
+.home__hint {
+  font-size: 0.875rem;
+  text-align: center;
+
+  @include desktop {
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    text-shadow: 0 0 6px $white;
+  }
+}
+
+
+// ==========================================================
+// 11. About (Figma frame "Desktop - portfolio about")
+// ==========================================================
+
+.about {
+  @include desktop {
+    aspect-ratio: 1440 / 760;
+  }
+}
+
+.about__photo {
+  @include desktop {
+    @include figma-position(511, 15, 864, 760, 643);
+  }
+
+  .window__body {
+    padding: 0;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.about__me {
+  @include desktop {
+    @include figma-position(46, 57, 864, 760, 643);
+  }
+
+  h1 {
+    font-size: inherit;
+    font-weight: 400;
+  }
+
+  p {
+    max-width: 42rem;
+    margin-top: 1em;
+  }
+}
+
+
+// ==========================================================
+// 12. Work (Figma frame "Desktop - portfolio work")
+// ==========================================================
+
+.work {
+  @include desktop {
+    aspect-ratio: 1440 / 800;
+  }
+}
+
+.work__paint {
+  aspect-ratio: 901 / 700;
+
+  @include desktop {
+    @include figma-position(512, 13, 901, 800, 778);
+  }
+
+  // the lettering sits on the right of the canvas, like in Figma
+  .paint__canvas {
+    justify-items: end;
+  }
+
+  .paint__canvas img {
+    width: 65%;
+  }
+}
+
+.work__browser {
+  @include desktop {
+    @include figma-position(43, 70, 864, 800, 643);
+  }
+}
+
+// The folders inside the browser window
+.folder-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: 1.5rem 1rem;
+
+  @include desktop {
+    grid-template-columns: 1fr 1fr;
+    padding: 0 2rem;
+  }
+
+  .desktop-icon {
+    align-items: flex-start;
+    width: 100%;
+    text-align: left;
+  }
+
+  .desktop-icon__image {
+    width: min(100%, 11rem);
+  }
+
+  .desktop-icon__label {
+    font-size: inherit;
+    text-shadow: none;
+  }
+}
+
+.folder-list__soon {
+  display: block;
+  font-size: 0.8em;
+}
+
+
+// ==========================================================
+// 13. Toolbox (Figma frame "Desktop - portfolio toolbox")
+// ==========================================================
+
+.toolbox {
+  display: grid;
+
+  @include desktop {
+    grid-template-columns: 58% 42%;
+  }
+}
+
+.toolbox__paint {
+  margin: 1.25rem 1rem;
+  aspect-ratio: 901 / 778;
+
+  @include desktop {
+    position: relative;
+    z-index: 1;
+    margin: 37px -100px 0 36px;
+  }
+}
+
+.toolbox__panel {
+  padding: 2rem 1rem;
+  color: $white;
+  background: $green;
+
+  @include desktop {
+    padding: 71px 70px 3rem 120px;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  > p {
+    max-width: 26rem;
+
+    @include desktop {
+      font-size: 20px;
+      line-height: 1.3;
+    }
+  }
+
+  h2 {
+    margin: 2rem 0 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+}
+
+.tool-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem 0.75rem;
+  max-width: 28rem;
+}
+
+.tool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  line-height: 1.2;
+  text-align: center;
+
+  img {
+    width: 100%;
+    max-width: 90px;
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
+}
+
+// Logos that need a white tile behind them
+.tool--tile img {
+  padding: 16%;
+  background: $white;
+  border-radius: 18%;
+}
+
+
+// ==========================================================
+// 14. Contact (Figma frame "Desktop - portfolio contact")
+// ==========================================================
+
+.contact {
+  @include desktop {
+    aspect-ratio: 1440 / 760;
+  }
+}
+
+.contact__window {
+  @include desktop {
+    @include figma-position(338, 58, 864, 760, 643);
+  }
+
+  h2 {
+    margin-top: 1.5rem;
+    font-size: inherit;
+    font-weight: 600;
+  }
+
+  li {
+    font-weight: 600;
+  }
+}
+
+
+// ==========================================================
+// 15. Case pages (ovio.html, garn-og-craft.html)
+// Each case has its own colours and fonts from its brand.
+// ==========================================================
+
+.case--ovio {
+  --case-bg: #f9f4e8;
+  --case-text: #635554;
+  --case-accent: #b92a2a;
+  --case-accent-2: #475d2f;
+  --case-heading-font: "Lexend Giga", sans-serif;
+  --case-body-font: "Lexend", sans-serif;
+}
+
+.case--garn {
+  --case-bg: #fff8f2;
+  --case-text: #40312e;
+  --case-accent: #40312e;
+  --case-accent-2: #40312e;
+  --case-heading-font: "Merriweather Sans", sans-serif;
+  --case-body-font: "Roboto", sans-serif;
+}
+
+.case {
+  padding: 1rem 0.5rem;
+
+  @include desktop {
+    padding: 21px 73px;
+  }
+}
+
+// The cream card
+.case-card {
+  padding: 1.25rem;
+  font-family: var(--case-body-font);
+  color: var(--case-text);
+  background: var(--case-bg);
+  border-radius: 20px;
+
+  @include desktop {
+    padding: 34px;
+  }
+}
+
+// "Case study 01"
+.case-card__label {
+  margin-bottom: 1.5rem;
+  font-family: $font-text;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: $black;
+}
+
+// Columns: stacked on phones, side by side on desktop
+.case-grid {
+  display: grid;
+  gap: 2.5rem;
+
+  @include desktop {
+    align-items: start;
+  }
+}
+
+.case-grid--three {
+  @include desktop {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+}
+
+.case-grid--two {
+  @include desktop {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+// Two small things next to each other (e.g. two logos)
+.case-pair {
+  display: grid;
+  gap: 1.5rem;
+
+  @include tablet {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+// Space between blocks in a column
+.case-column > * + * {
+  margin-top: 1.75rem;
+}
+
+// Title
+.case-title {
+  font-family: var(--case-heading-font);
+  font-size: 2.5rem;
+  line-height: 1.1;
+  color: var(--case-accent);
+}
+
+.case-tagline {
+  margin-top: 0.5rem;
+  font-family: var(--case-heading-font);
+  font-size: 1.125rem;
+  color: var(--case-accent-2);
+}
+
+// Text blocks
+.case-text {
+  line-height: 1.6;
+
+  h2,
+  h3 {
+    font-family: var(--case-heading-font);
+    font-size: 1.0625rem;
+    font-weight: 600;
+  }
+
+  p + p,
+  p + ul,
+  ul + p {
+    margin-top: 0.75em;
+  }
+
+  ul {
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+}
+
+// Role / Subject / Year
+.case-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 0.9rem 0;
+  font-size: 0.875rem;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+
+  dt {
+    font-family: var(--case-heading-font);
+    font-weight: 600;
+  }
+
+  dd {
+    margin: 0;
+  }
+}
+
+// Small headings: "Tools used:", "Colors", "Typography"
+.case-small-heading {
+  margin-bottom: 0.5rem;
+  font-family: var(--case-heading-font);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.case-tools {
+  display: flex;
+  gap: 0.6rem;
+
+  img {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+  }
+}
+
+// Colour swatches
+.palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.swatch {
+  width: 4.75rem;
+  font-size: 0.75rem;
+  line-height: 1.3;
+
+  // the coloured box; the colour is set in the HTML with style="background: ..."
+  span {
+    display: block;
+    height: 50px;
+    margin-bottom: 0.3rem;
+    border: 1px solid var(--case-text);
+    border-radius: 15px;
+  }
+}
+
+// Typography samples
+.fonts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  font-size: 0.8125rem;
+}
+
+.font-sample {
+  display: block;
+  font-size: 2.5rem;
+  line-height: 1.1;
+}
+
+// Images with a caption
+.case-figure figcaption {
+  margin-bottom: 0.5rem;
+  font-family: var(--case-heading-font);
+}
+
+// Logos exported with a white background: "multiply" hides the white
+.blend {
+  mix-blend-mode: multiply;
+}
+
+// Website designs shown in a small browser window that you can scroll
+.mockup__screen {
+  height: 34rem;
+  max-height: 75vh;
+  padding: 0;
+}
+
+.mockup__screen--tall {
+  height: 46rem;
+}
+
+.mockup .browser-bar svg {
+  width: 18px;
+  height: 18px;
+}
+
+.mockup-hint {
+  margin-top: 0.4rem;
+  font-size: 0.8125rem;
+}
+
+// "Do you want to read more about this case study?"
+.readmore {
+  display: grid;
+  justify-items: center;
+  gap: 1.5rem;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+// Each word looks like a black Dymo label
+.readmore h2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem 0.2rem;
+  max-width: 40rem;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 1.25rem;
+  font-weight: 400;
+  text-transform: uppercase;
+
+  @include desktop {
+    font-size: 32px;
+  }
+
+  span {
+    padding: 0.1em 0.2em;
+    color: #f2f2f2;
+    background: #111;
+    border-radius: 2px;
+    text-shadow: 0 1px 0 rgb(255 255 255 / 0.35);
+  }
+}
+
+.readmore__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+
+  @include desktop {
+    gap: 116px;
+  }
+}
+
+// Links to the next case
+.case-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  font-family: $font-text;
+  border-top: 1px solid;
+}
+
+
+// ==========================================================
+// 16. 404 page
+// ==========================================================
+
+.not-found {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+
+  .window {
+    width: min(100%, 30rem);
+  }
+
+  .window__body {
+    display: grid;
+    gap: 1rem;
+    font-family: $font-system;
+    font-size: 1rem;
+    background: $win-grey;
+    border: 0;
+  }
+}
+
+.not-found__buttons {
+  display: flex;
+  gap: 0.5rem;
+
+  a {
+    @include bevel;
+    padding: 0.4rem 1rem;
+    text-decoration: none;
+  }
+}
+
+/* GLS and Phishing: preserve the original case-study artwork exactly.
+   The same .case wrapper and .case-pager are used by OVIO and Garn & Craft. */
+.original-case__pages { display: grid; gap: 1.25rem; }
+.original-case__figure { margin: 0; }
+.original-case__figure img { display: block; width: 100%; height: auto; }
+.original-case .case-pager { color: #000; }
+@media (max-width: 767px) { .original-case__pages { gap: .75rem; } }
+
+
+/* Hand-built, semantic GLS and phishing case studies inspired by the supplied layouts. */
+.case--gls {--case-bg:#fff;--case-text:#111;--case-accent:#111;--case-heading-font:"DM Sans",sans-serif;--case-body-font:"DM Sans",sans-serif;--rule:#2134da}
+.case--phishing {--case-bg:#102636;--case-text:#fff;--case-accent:#fff;--case-heading-font:"DM Sans",sans-serif;--case-body-font:"DM Sans",sans-serif;--rule:#d88949}
+.rebuild-card {border-radius:32px; padding:clamp(20px,3vw,34px);margin-bottom:1.5rem}
+.rebuild-layout {display:grid;grid-template-columns:minmax(0, .82fr) minmax(0,1.18fr);gap:clamp(24px,3vw,48px);align-items:start}
+.rebuild-copy,.rebuild-visuals {min-width:0;display:grid;gap:1.1rem}
+.rebuild-copy h1 {font-size:clamp(1.35rem,2vw,2rem);line-height:1.15;font-weight:750}
+.rebuild-lede {font-size:clamp(1.05rem,1.4vw,1.4rem);font-weight:600;line-height:1.25}
+.rebuild-card .case-text {line-height:1.36;font-size:clamp(.95rem,1.2vw,1.1rem)}
+.rebuild-card .case-text h2,.rebuild-tools h2 {font-size:1.13rem;line-height:1.3;font-weight:750;margin-bottom:.15rem}
+.rebuild-meta {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;border-top:1px solid var(--rule);padding-top:.5rem}
+.rebuild-meta dt {font-weight:700}.rebuild-meta dd {margin:0;font-size:.92rem;line-height:1.3}
+.rebuild-tools {border-block:1px solid var(--rule);padding:.55rem 0}.rebuild-tools ul {display:flex;gap:.65rem;flex-wrap:wrap;margin-top:.6rem}.rebuild-tools img {width:37px;height:37px;object-fit:contain}
+.rebuild-gallery {display:grid;gap:.6rem}.rebuild-gallery--gls {grid-template-columns:repeat(2,minmax(0,1fr))}
+.rebuild-figure {margin:0;min-width:0}.rebuild-figure img {display:block;width:100%;height:auto;border-radius:9px}.rebuild-figure figcaption {font-size:.88rem;margin-top:.25rem}
+.rebuild-visuals--phishing {gap:1.3rem}.rebuild-layout--process {grid-template-columns:1.05fr .95fr}
+.rebuild-flow img {width:100%;max-height:900px;object-fit:contain;object-position:top;background:#ddd}
+.rebuild-layout--process .rebuild-visuals>.rebuild-figure {max-width:300px}
+.case--phishing .case-pager {color:#111}
+@media(max-width:850px){.rebuild-layout,.rebuild-layout--process{grid-template-columns:1fr}.rebuild-copy{gap:1rem}.rebuild-layout--process .rebuild-visuals>.rebuild-figure{max-width:300px}}
+@media(max-width:480px){.rebuild-meta{grid-template-columns:1fr 1fr}.rebuild-card{border-radius:20px}.rebuild-gallery--gls{gap:.4rem}}
+
+/* Project typography overrides. Newson requires a separately licensed font file. */
+.case--gls .rebuild-card {font-family: "Newson", "DM Sans", sans-serif;}
+.case--phishing .rebuild-card {font-family: "Lato", Arial, sans-serif;}
+.case--gls .rebuild-card :is(h1,h2,p,dt,dd), .case--phishing .rebuild-card :is(h1,h2,p,dt,dd) {font-family:inherit;}
+
+/* Full-resolution, individually extracted PDF images for the phishing sequence. */
+.phishing-screens { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.6rem; align-items:start; }
+.phishing-screens .rebuild-figure img {width:100%;height:auto;object-fit:contain;}
+@media(max-width:480px){.phishing-screens{gap:.3rem}}

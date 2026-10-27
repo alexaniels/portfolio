@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolbox – Alexandra Nielsen</title>
+  <meta name="description" content="The design, development and AI tools Alexandra Nielsen works with.">
+  <link rel="icon" href="assets/icons/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="site-header__bar">
+      <a class="site-header__name" href="index.html">Alexandra Nielsen</a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="toolbox.html" aria-current="page">Toolbox</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="toolbox">
+
+      <!-- Paint window with the toolbox drawing -->
+      <div class="window window--paint toolbox__paint">
+        <div class="window__titlebar" aria-hidden="true">
+          <img src="assets/img/paint/paint-icon.png" alt="" width="20" height="25">
+          <span class="window__title">untitled - Paint</span>
+          <div class="window__controls">
+            <span class="window__control"><svg><use href="assets/icons/ui.svg#minimize"></use></svg></span>
+            <span class="window__control"><svg><use href="assets/icons/ui.svg#maximize"></use></svg></span>
+            <span class="window__control window__control--close"><svg><use href="assets/icons/ui.svg#close"></use></svg></span>
+          </div>
+        </div>
+        <div class="paint__menu" aria-hidden="true">
+          <span>File</span><span>Edit</span><span>View</span><span>Image</span><span>Colors</span><span>Help</span>
+        </div>
+        <div class="paint__workspace">
+          <img class="paint__tools" src="assets/img/paint/paint-tools.png" alt="" width="130" height="640">
+          <div class="paint__canvas">
+            <img src="assets/img/toolbox/toolbox-sketch.png" alt="Hand-drawn sketch of an open toolbox with a wrench and a hammer inside." width="682" height="521">
+          </div>
+        </div>
+        <img class="paint__palette" src="assets/img/paint/paint-palette.png" alt="" width="598" height="80">
+        <p class="paint__status" aria-hidden="true">For Help, click Help Topics on the Help Menu.</p>
+      </div>
+
+      <!-- Green panel with the tools -->
+      <section class="toolbox__panel">
+        <h1>Tools and technologies</h1>
+        <p>As a multimedia design student I use a broad mix of design, development and AI tools to create digital solutions.</p>
+
+        <h2 class="visually-hidden">Design</h2>
+        <ul class="tool-list">
+          <li class="tool tool--tile"><img src="assets/icons/tools/figma.png" alt="" width="90" height="90">Figma</li>
+          <li class="tool"><img src="assets/icons/tools/illustrator.png" alt="" width="90" height="90">Adobe Illustrator</li>
+          <li class="tool"><img src="assets/icons/tools/indesign.png" alt="" width="90" height="90">Adobe InDesign</li>
+          <li class="tool"><img src="assets/icons/tools/photoshop.png" alt="" width="90" height="90">Adobe Photoshop</li>
+          <li class="tool"><img src="assets/icons/tools/after-effects.png" alt="" width="90" height="90">Adobe After Effects</li>
+          <li class="tool"><img src="assets/icons/tools/premiere-pro.png" alt="" width="90" height="90">Adobe Premiere Pro</li>
+          <li class="tool"><img src="assets/icons/tools/canva.png" alt="" width="90" height="90">Canva</li>
+          <li class="tool"><img src="assets/icons/tools/procreate.png" alt="" width="90" height="90">Procreate</li>
+        </ul>
+
+        <h2 class="visually-hidden">Code</h2>
+        <ul class="tool-list">
+          <li class="tool"><img src="assets/icons/tools/html.png" alt="" width="90" height="90">HTML</li>
+          <li class="tool"><img src="assets/icons/tools/css.svg" alt="" width="90" height="90">CSS</li>
+          <li class="tool"><img src="assets/icons/tools/scss.png" alt="" width="90" height="90">SCSS</li>
+          <li class="tool"><img src="assets/icons/tools/javascript.png" alt="" width="90" height="90">JavaScript</li>
+          <li class="tool"><img src="assets/icons/tools/github.png" alt="" width="90" height="90">GitHub</li>
+          <li class="tool"><img src="assets/icons/tools/wordpress.png" alt="" width="90" height="90">WordPress</li>
+        </ul>
+
+        <h2 class="visually-hidden">AI</h2>
+        <ul class="tool-list">
+          <li class="tool"><img src="assets/icons/tools/gemini.png" alt="" width="90" height="90">Gemini</li>
+          <li class="tool tool--tile"><img src="assets/icons/tools/chatgpt.png" alt="" width="90" height="90">ChatGPT</li>
+          <li class="tool"><img src="assets/icons/tools/claude.png" alt="" width="90" height="90">Claude</li>
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Alexandra Nielsen</p>
+  </footer>
+</body>
+</html>
