@@ -427,6 +427,7 @@ a.window__control:active {
 }
 
 .window__body {
+  position: relative; // keeps hidden screen-reader text inside the scroll area
   flex: 1;
   margin-top: 4px;
   padding: 1rem;
@@ -738,15 +739,41 @@ a.window__control:active {
   }
 }
 
+// Desktop: the page is invisible until FitToScreen (classes.js) has
+// zoomed it to fit the screen, so you don't see it jump in size.
+// If the JavaScript doesn't run, the animation shows it after 1 second anyway.
+@include desktop {
+  .desktop,
+  .toolbox {
+    opacity: 0;
+    animation: show-page 0s 1s forwards;
+  }
+
+  .desktop.is-fitted,
+  .toolbox.is-fitted {
+    opacity: 1;
+    animation: none;
+    transition: opacity 0.2s;
+  }
+}
+
+@keyframes show-page {
+  to {
+    opacity: 1;
+  }
+}
+
 
 // ==========================================================
 // 10. Home (Figma frame "Desktop - portfolio frontpage")
 // Stage below the marquee is 858px high in Figma.
 // ==========================================================
 
+$home-h: 858;
+
 .home {
   @include desktop {
-    aspect-ratio: 1440 / 858;
+    aspect-ratio: 1440 / #{$home-h}; // #{} writes the number, so Sass doesn't divide
   }
 }
 
@@ -755,7 +782,7 @@ a.window__control:active {
   margin: 0 auto;
 
   @include desktop {
-    @include figma-position(313, -16, 814, 858);
+    @include figma-position(313, -16, 814, $home-h);
   }
 }
 
@@ -779,43 +806,75 @@ a.window__control:active {
 .icon-illustrator,
 .icon-figma,
 .icon-vscode {
-  width: 4.5rem;
+  width: 5.25rem;
 }
 
-// Positions from Figma: x, y, width (only on desktop)
+// Positions from Figma: x, y, width (only on desktop).
+// The icons are about 20% bigger than in Figma, and moved a little further
+// away from the monitor.
 @include desktop {
-  .icon-work { @include figma-position(91, 55, 128, 858); }
-  .icon-ovio { @include figma-position(29, 233, 150, 858); }
-  .icon-illustrator { @include figma-position(193, 409, 70, 858); }
-  .icon-toolbox { @include figma-position(164, 553, 128, 858); }
-  .icon-gls { @include figma-position(326, 696, 140, 858); }
-  .icon-about { @include figma-position(1185, 76, 128, 858); }
-  .icon-figma { @include figma-position(1270, 328, 70, 858); }
-  .icon-garn { @include figma-position(1164, 489, 135, 858); }
-  .icon-vscode { @include figma-position(1087, 701, 87, 858); }
+  .icon-work { @include figma-position(40, 55, 152, $home-h); }
+  .icon-ovio { @include figma-position(10, 240, 176, $home-h); }
+  .icon-illustrator { @include figma-position(150, 409, 86, $home-h); }
+  .icon-toolbox { @include figma-position(95, 553, 152, $home-h); }
+  .icon-gls { @include figma-position(255, 696, 166, $home-h); }
+  .icon-about { @include figma-position(1240, 70, 152, $home-h); }
+  .icon-figma { @include figma-position(1320, 320, 86, $home-h); }
+  .icon-garn { @include figma-position(1225, 440, 155, $home-h); }
+  .icon-vscode { @include figma-position(1130, 725, 103, $home-h); }
 }
 
-// "Welcome" box: who I am and a way to my work.
-// Phone/tablet: under the monitor. Desktop: pops up over the monitor's stand.
-.home__intro {
-  width: min(100%, 30rem);
-  margin: 0 auto;
+// Sticky note: who I am and a way to my work, stuck on the
+// computer's frame like a real note.
+.home__note {
+  position: relative;
+  z-index: 1;
+  width: 14rem;
+  margin: -3.5rem 1rem 0 auto; // phones: overlaps the bottom of the monitor
+  padding: 1.4em 1em 1em;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+  color: $black;
+  background: #fdf3a1;
+  box-shadow: 2px 4px 10px rgb(0 0 0 / 0.25);
+  transform: rotate(3deg);
 
+  // Desktop: on the grey frame under the bottom-right of the screen.
+  // Width and text size follow the width of the page, like the monitor.
   @include desktop {
-    @include figma-position(450, 500, 540, 858);
+    position: absolute;
+    top: calc(560 / $home-h * 100%); // on the grey frame (the screen ends at about 518)
+    left: calc(850 / 1440 * 100%);
+    width: calc(230 / 1440 * 100%);
     margin: 0;
+    font-size: clamp(0.7rem, 1vw, 0.9375rem);
   }
 
-  .window__title {
-    font-size: 1rem;
+  // A piece of tape holding the note
+  &::before {
+    content: "";
+    position: absolute;
+    top: -0.6em;
+    left: calc(50% - 2.5em);
+    width: 5em;
+    height: 1.4em;
+    background: rgb(255 255 255 / 0.55);
+    transform: rotate(3deg);
   }
 
-  .window__body {
-    display: grid;
-    gap: 0.75rem;
-    justify-items: start;
-    font-size: 1rem;
-    line-height: 1.4;
+  h2 {
+    font-size: 1.15em;
+    font-weight: 600;
+  }
+
+  p {
+    margin-top: 0.35em;
+  }
+
+  a {
+    display: inline-block;
+    margin-top: 0.6em;
+    font-weight: 600;
   }
 }
 
@@ -939,6 +998,10 @@ a.window__control:active {
   @include desktop {
     @include figma-position(43, 70, 864, 800, 643);
     z-index: 1; // in front of the Paint window (it comes first in the HTML)
+
+    .window__body {
+      padding: 0.75rem 1rem;
+    }
   }
 }
 
@@ -948,9 +1011,13 @@ a.window__control:active {
   grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
   gap: 1.5rem 1rem;
 
+  // Desktop: smaller folders and labels, so all four fit in the
+  // window without scrolling inside it
   @include desktop {
     grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 1rem;
     padding: 0 2rem;
+    font-size: 1rem;
   }
 
   .desktop-icon {
@@ -965,42 +1032,64 @@ a.window__control:active {
   }
 }
 
-// Folder with a preview of the project peeking out of the top
+// Folder with a preview of the project inside it.
+// Three layers: the folder, the preview, and the folder again,
+// cut down to only its front flap (clip-path). So the preview sits
+// between the back and the front of the folder, like a paper in it.
 .folder-icon {
   position: relative;
   display: block;
   width: min(100%, 11rem);
-  padding-top: 18%; // room for the preview above the folder
+  padding-top: 18%; // room above the folder for the preview when it slides out
 
-  .desktop-icon__image {
-    position: relative; // stays in front of the preview
-    width: 100%;
+  @include desktop {
+    width: min(8.5rem, 8.5vw); // follows the size of the window
   }
 }
 
-.folder-icon__preview {
+// The preview sits inside the folder: its top is just above the
+// front flap, and its right side sticks out a little past the folder.
+// (Measured on folder.png: the back starts 20% down, the front flap 25%.)
+// ".folder-icon" in front, so this wins over ".desktop-icon img { width: 100% }"
+.folder-icon .folder-icon__preview {
   position: absolute;
-  top: 6%;
-  left: 18%;
-  width: 60%;
-  aspect-ratio: 4 / 3;
+  top: 34%;    // 18% padding + 22% of the folder picture, as % of the whole height (118%)
+  left: 10.5%;
+  width: 89%;
+  aspect-ratio: 3 / 2;
   object-fit: cover;
   object-position: top;
   border: 2px solid $white;
   box-shadow: 0 1px 3px rgb(0 0 0 / 0.3);
-  transform: rotate(-5deg);
-  transition: transform 0.15s;
+  transition: transform 0.2s;
 }
 
-// The preview slides up a little when the folder is selected
-.desktop-icon.is-selected .folder-icon__preview,
-.desktop-icon:focus-visible .folder-icon__preview {
-  opacity: 1;
-  transform: rotate(-2deg) translateY(-12%);
+// The front flap starts about 24% down the folder picture
+.folder-icon__front {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  clip-path: inset(24% 0 0 0);
+}
+
+// Selected (hover or keyboard focus): the folder is shaded like in
+// Windows, and the preview slides up out of the folder
+.desktop-icon.is-selected .folder-icon,
+.desktop-icon:focus-visible .folder-icon {
+  opacity: 0.75;
+
+  img {
+    opacity: 1;
+  }
+}
+
+.desktop-icon.is-selected .folder-icon .folder-icon__preview,
+.desktop-icon:focus-visible .folder-icon .folder-icon__preview {
+  transform: translateY(-58%) rotate(-3deg);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .folder-icon__preview {
+  .folder-icon .folder-icon__preview {
     transition: none;
   }
 }
@@ -1056,7 +1145,7 @@ a.window__control:active {
   @include desktop {
     grid-row: 1;
     grid-column: 2;
-    padding: 71px 70px 3rem 120px;
+    padding: 32px 40px 1rem 120px;
   }
 
   a {
@@ -1073,8 +1162,8 @@ a.window__control:active {
     max-width: 26rem;
 
     @include desktop {
-      font-size: 20px;
-      line-height: 1.3;
+      margin-top: 0.4rem;
+      line-height: 1.4;
     }
   }
 
@@ -1082,6 +1171,10 @@ a.window__control:active {
     margin: 2rem 0 0.75rem;
     font-size: 1.125rem;
     font-weight: 500;
+
+    @include desktop {
+      margin: 1rem 0 0.4rem;
+    }
   }
 }
 
@@ -1090,6 +1183,14 @@ a.window__control:active {
   grid-template-columns: repeat(4, 1fr);
   gap: 1.25rem 0.75rem;
   max-width: 28rem;
+
+  // Desktop: six small tools per row, so the page fits on the screen
+  @include desktop {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.75rem 0.5rem;
+    max-width: none;
+    font-size: 0.8125rem;
+  }
 }
 
 .tool {
@@ -1105,6 +1206,10 @@ a.window__control:active {
     max-width: 90px;
     aspect-ratio: 1;
     object-fit: contain;
+
+    @include desktop {
+      max-width: 52px;
+    }
   }
 }
 
@@ -1112,12 +1217,6 @@ a.window__control:active {
 .tool__used {
   font-size: 0.75rem;
   line-height: 1.3;
-}
-
-// How I use AI (text instead of three chatbot logos)
-.toolbox__ai {
-  max-width: 26rem;
-  line-height: 1.4;
 }
 
 // Logos that need a white tile behind them
@@ -1454,28 +1553,16 @@ a.window__control:active {
   text-align: center;
 }
 
-// Each word looks like a black Dymo label
 .readmore h2 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.35rem 0.2rem;
   max-width: 40rem;
-  font-family: "Share Tech Mono", monospace;
+  font-family: $font-text;
   font-size: 1.25rem;
-  font-weight: 400;
-  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 1.2;
+  color: $black;
 
   @include desktop {
     font-size: 32px;
-  }
-
-  span {
-    padding: 0.1em 0.2em;
-    color: #f2f2f2;
-    background: #111;
-    border-radius: 2px;
-    text-shadow: 0 1px 0 rgb(255 255 255 / 0.35);
   }
 }
 

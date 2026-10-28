@@ -7,7 +7,7 @@ Live at **https://alenie.dk** (site in the root of the domain).
 ## Files
 
 ```
-index.html               Home (desktop with icons + "Welcome" box)
+index.html               Home (desktop with icons + sticky note)
 about.html               About me (+ short summary in French)
 work.html                My projects (folders, made by main.js)
 toolbox.html             Tools and technologies
@@ -22,7 +22,7 @@ phishing-awareness.html  Case study 04
 scss/_mixins.scss   variables (colours, fonts) + mixins
 scss/style.scss     all the styles  →  compiled to css/style.css
 
-js/classes.js       all classes (Project, DesktopIcon, ProjectFolder, ReadMore) + showMessage – exported
+js/classes.js       all classes (Project, DesktopIcon, ProjectFolder, ReadMore, FitToScreen) + showMessage – exported
 js/main.js          imports the classes and uses them on the page
 
 assets/             fonts, images, icons
@@ -46,8 +46,9 @@ docs/               plan, OOUX object map, AI log
 |---|---|---|
 | `Project` | One of my projects: title, page, status, preview picture, tag | private field `#status` + getter `isReady` (encapsulation) |
 | `DesktopIcon` | Hover/focus = selected (blue label). Click = open, like a normal link, so Cmd-click opens a new tab | `static selected` shared by all icons |
-| `ProjectFolder` | A folder on the Work page, with a preview peeking out | `extends DesktopIcon` (inheritance), *has a* Project (composition), overrides `handleClick()` (polymorphism) |
-| `ReadMore` | "Do you want to read more? Yes" scrolls down to the rest of the case and moves focus there | |
+| `ProjectFolder` | A folder on the Work page, with a preview of the project inside it | `extends DesktopIcon` (inheritance), *has a* Project (composition), overrides `handleClick()` (polymorphism) |
+| `ReadMore` | Hides the rest of the case until "Do you want to read more? Yes" is clicked, then shows it and moves focus there | |
+| `FitToScreen` | On computer screens, zooms Home, About, Work, Toolbox and Contact out so the whole page fits without scrolling (never below 65 %). The page stays invisible until it is zoomed, then fades in, so it never jumps in size | private field `#element` (encapsulation) |
 | `showMessage()` | A Windows 98 message box (native `<dialog>`), e.g. "coming soon" | function, not a class |
 
 To add a project to the Work page: add a line to the `projects` list at the top of `js/main.js`.
@@ -86,17 +87,18 @@ A browser only downloads the fonts a page actually uses.
 - ✅ Icons open with one click (Cmd-click works). Hover/focus selects. The "double-click" tip is gone.
 - ✅ `.htaccess` added (404 page). The site lives in the root of alenie.dk, so the 404 paths are right, and the fake address bars now show `alenie.dk/about` etc.
 - ✅ SCSS compiles again, and Watch Sass writes to `css/style.css`.
-- ✅ Home: a Win98 "Welcome" box says who I am and links to my work. All icons have visible labels. VS Code opens the coded phishing project.
-- ✅ Work: the project window comes first (phones see the projects before the drawing). Each folder has a preview peeking out and a tag (e.g. "Branding + web · Solo project").
-- ✅ The read-more gate no longer hides anything. "Yes" scrolls down, "No" goes back. It's used on all 4 cases.
+- ✅ Home: the icons are about 20% bigger than in Figma and a little further from the monitor. A yellow sticky note, stuck on the grey frame under the screen, says who I am and links to my work (my choice, instead of a "Welcome" window). All icons have visible labels. VS Code opens the coded phishing project.
+- ✅ Work: the project window comes first (phones see the projects before the drawing). Each folder has a preview of the project inside it (only a strip shows above the front flap and on the right side), and the preview slides out of the folder on hover or keyboard focus and a tag (e.g. "Branding + web · Solo project"). On computers the folders are small enough that all four fit in the window without scrolling inside it.
+- ✅ The read-more gate is used on all 4 cases. The rest of the case stays hidden until "Yes" (my choice: I keep the gate). The heading is now a plain black sentence in DM Sans.
 - ✅ GLS and Phishing rebuilt on the same template as OVIO and Garn ("Case study 03/04"), with readable HTML, image sizes, their own colours and fonts, and no bolted-on CSS.
 - ✅ "Solo project" on every case.
 - ✅ Window ✕ buttons on About, Work, Toolbox and Contact go back to the desktop.
-- ✅ Toolbox grouped by what I do. Each tool links to the cases where I used it, and one line about AI replaces the three chatbot logos.
+- ✅ Toolbox grouped by what I do, and each tool links to the cases where I used it. The AI tools (Gemini, ChatGPT, Claude) keep their icons (my choice).
 - ✅ About leads with what I do, then "Looking for / Based in / Languages", the CV, and a short summary in French. Contact has a visible heading and says where I am.
 - ✅ Lato is self-hosted (no Google Fonts, no GDPR issue).
 - ✅ 2.8 MB of unused images removed. Folder previews are small (7–24 KB).
 - ✅ Open Graph tags (share preview) on every page.
+- ✅ Home, About, Work, Toolbox and Contact fit on the screen without scrolling on computer screens (checked at 1280×720, 1366×768, 1440×900 and 1920×1080). Toolbox shows six small tools per row on computers to make this possible. Case pages still scroll, because they are long articles.
 - ✅ Copy: the same date format everywhere, "front page", and the phishing sender-address sentence.
 
 **Still for me (Alexandra)**

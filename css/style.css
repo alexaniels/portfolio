@@ -352,6 +352,7 @@ a.window__control:active {
 }
 
 .window__body {
+  position: relative;
   flex: 1;
   margin-top: 4px;
   padding: 1rem;
@@ -626,6 +627,24 @@ a.window__control:active {
 }
 
 @media (min-width: 1024px) {
+  .desktop,
+  .toolbox {
+    opacity: 0;
+    animation: show-page 0s 1s forwards;
+  }
+  .desktop.is-fitted,
+  .toolbox.is-fitted {
+    opacity: 1;
+    animation: none;
+    transition: opacity 0.2s;
+  }
+}
+@keyframes show-page {
+  to {
+    opacity: 1;
+  }
+}
+@media (min-width: 1024px) {
   .home {
     aspect-ratio: 1440/858;
   }
@@ -662,87 +681,109 @@ a.window__control:active {
 .icon-illustrator,
 .icon-figma,
 .icon-vscode {
-  width: 4.5rem;
+  width: 5.25rem;
 }
 
 @media (min-width: 1024px) {
   .icon-work {
     position: absolute;
-    left: 6.3194444444%;
+    left: 2.7777777778%;
     top: 6.4102564103%;
-    width: 8.8888888889%;
+    width: 10.5555555556%;
   }
   .icon-ovio {
     position: absolute;
-    left: 2.0138888889%;
-    top: 27.1561771562%;
-    width: 10.4166666667%;
+    left: 0.6944444444%;
+    top: 27.972027972%;
+    width: 12.2222222222%;
   }
   .icon-illustrator {
     position: absolute;
-    left: 13.4027777778%;
+    left: 10.4166666667%;
     top: 47.668997669%;
-    width: 4.8611111111%;
+    width: 5.9722222222%;
   }
   .icon-toolbox {
     position: absolute;
-    left: 11.3888888889%;
+    left: 6.5972222222%;
     top: 64.4522144522%;
-    width: 8.8888888889%;
+    width: 10.5555555556%;
   }
   .icon-gls {
     position: absolute;
-    left: 22.6388888889%;
+    left: 17.7083333333%;
     top: 81.1188811189%;
-    width: 9.7222222222%;
+    width: 11.5277777778%;
   }
   .icon-about {
     position: absolute;
-    left: 82.2916666667%;
-    top: 8.8578088578%;
-    width: 8.8888888889%;
+    left: 86.1111111111%;
+    top: 8.1585081585%;
+    width: 10.5555555556%;
   }
   .icon-figma {
     position: absolute;
-    left: 88.1944444444%;
-    top: 38.2284382284%;
-    width: 4.8611111111%;
+    left: 91.6666666667%;
+    top: 37.296037296%;
+    width: 5.9722222222%;
   }
   .icon-garn {
     position: absolute;
-    left: 80.8333333333%;
-    top: 56.993006993%;
-    width: 9.375%;
+    left: 85.0694444444%;
+    top: 51.2820512821%;
+    width: 10.7638888889%;
   }
   .icon-vscode {
     position: absolute;
-    left: 75.4861111111%;
-    top: 81.7016317016%;
-    width: 6.0416666667%;
+    left: 78.4722222222%;
+    top: 84.4988344988%;
+    width: 7.1527777778%;
   }
 }
-.home__intro {
-  width: min(100%, 30rem);
-  margin: 0 auto;
+.home__note {
+  position: relative;
+  z-index: 1;
+  width: 14rem;
+  margin: -3.5rem 1rem 0 auto;
+  padding: 1.4em 1em 1em;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+  color: #000;
+  background: #fdf3a1;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.25);
+  transform: rotate(3deg);
 }
 @media (min-width: 1024px) {
-  .home__intro {
+  .home__note {
     position: absolute;
-    left: 31.25%;
-    top: 58.2750582751%;
-    width: 37.5%;
+    top: 65.2680652681%;
+    left: 59.0277777778%;
+    width: 15.9722222222%;
     margin: 0;
+    font-size: clamp(0.7rem, 1vw, 0.9375rem);
   }
 }
-.home__intro .window__title {
-  font-size: 1rem;
+.home__note::before {
+  content: "";
+  position: absolute;
+  top: -0.6em;
+  left: calc(50% - 2.5em);
+  width: 5em;
+  height: 1.4em;
+  background: rgba(255, 255, 255, 0.55);
+  transform: rotate(3deg);
 }
-.home__intro .window__body {
-  display: grid;
-  gap: 0.75rem;
-  justify-items: start;
-  font-size: 1rem;
-  line-height: 1.4;
+.home__note h2 {
+  font-size: 1.15em;
+  font-weight: 600;
+}
+.home__note p {
+  margin-top: 0.35em;
+}
+.home__note a {
+  display: inline-block;
+  margin-top: 0.6em;
+  font-weight: 600;
 }
 
 @media (min-width: 1024px) {
@@ -860,6 +901,9 @@ a.window__control:active {
     height: 80.375%;
     z-index: 1;
   }
+  .work__browser .window__body {
+    padding: 0.75rem 1rem;
+  }
 }
 
 .folder-list {
@@ -870,7 +914,9 @@ a.window__control:active {
 @media (min-width: 1024px) {
   .folder-list {
     grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 1rem;
     padding: 0 2rem;
+    font-size: 1rem;
   }
 }
 .folder-list .desktop-icon {
@@ -889,33 +935,48 @@ a.window__control:active {
   width: min(100%, 11rem);
   padding-top: 18%;
 }
-.folder-icon .desktop-icon__image {
-  position: relative;
-  width: 100%;
+@media (min-width: 1024px) {
+  .folder-icon {
+    width: min(8.5rem, 8.5vw);
+  }
 }
 
-.folder-icon__preview {
+.folder-icon .folder-icon__preview {
   position: absolute;
-  top: 6%;
-  left: 18%;
-  width: 60%;
-  aspect-ratio: 4/3;
+  top: 34%;
+  left: 10.5%;
+  width: 89%;
+  aspect-ratio: 3/2;
   object-fit: cover;
   object-position: top;
   border: 2px solid #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  transform: rotate(-5deg);
-  transition: transform 0.15s;
+  transition: transform 0.2s;
 }
 
-.desktop-icon.is-selected .folder-icon__preview,
-.desktop-icon:focus-visible .folder-icon__preview {
+.folder-icon__front {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  clip-path: inset(24% 0 0 0);
+}
+
+.desktop-icon.is-selected .folder-icon,
+.desktop-icon:focus-visible .folder-icon {
+  opacity: 0.75;
+}
+.desktop-icon.is-selected .folder-icon img,
+.desktop-icon:focus-visible .folder-icon img {
   opacity: 1;
-  transform: rotate(-2deg) translateY(-12%);
+}
+
+.desktop-icon.is-selected .folder-icon .folder-icon__preview,
+.desktop-icon:focus-visible .folder-icon .folder-icon__preview {
+  transform: translateY(-58%) rotate(-3deg);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .folder-icon__preview {
+  .folder-icon .folder-icon__preview {
     transition: none;
   }
 }
@@ -966,7 +1027,7 @@ a.window__control:active {
   .toolbox__panel {
     grid-row: 1;
     grid-column: 2;
-    padding: 71px 70px 3rem 120px;
+    padding: 32px 40px 1rem 120px;
   }
 }
 .toolbox__panel a {
@@ -982,8 +1043,8 @@ a.window__control:active {
 }
 @media (min-width: 1024px) {
   .toolbox__panel > p {
-    font-size: 20px;
-    line-height: 1.3;
+    margin-top: 0.4rem;
+    line-height: 1.4;
   }
 }
 .toolbox__panel h2 {
@@ -991,12 +1052,25 @@ a.window__control:active {
   font-size: 1.125rem;
   font-weight: 500;
 }
+@media (min-width: 1024px) {
+  .toolbox__panel h2 {
+    margin: 1rem 0 0.4rem;
+  }
+}
 
 .tool-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.25rem 0.75rem;
   max-width: 28rem;
+}
+@media (min-width: 1024px) {
+  .tool-list {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.75rem 0.5rem;
+    max-width: none;
+    font-size: 0.8125rem;
+  }
 }
 
 .tool {
@@ -1013,15 +1087,15 @@ a.window__control:active {
   aspect-ratio: 1;
   object-fit: contain;
 }
+@media (min-width: 1024px) {
+  .tool img {
+    max-width: 52px;
+  }
+}
 
 .tool__used {
   font-size: 0.75rem;
   line-height: 1.3;
-}
-
-.toolbox__ai {
-  max-width: 26rem;
-  line-height: 1.4;
 }
 
 .tool--tile img {
@@ -1325,27 +1399,17 @@ a.window__control:active {
 }
 
 .readmore h2 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.35rem 0.2rem;
   max-width: 40rem;
-  font-family: "Share Tech Mono", monospace;
+  font-family: "DM Sans", sans-serif;
   font-size: 1.25rem;
-  font-weight: 400;
-  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #000;
 }
 @media (min-width: 1024px) {
   .readmore h2 {
     font-size: 32px;
   }
-}
-.readmore h2 span {
-  padding: 0.1em 0.2em;
-  color: #f2f2f2;
-  background: #111;
-  border-radius: 2px;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
 .readmore__buttons {

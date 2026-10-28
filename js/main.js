@@ -4,7 +4,7 @@
 // and uses them on the page that is open.
 // ==========================================================
 
-import { Project, DesktopIcon, ProjectFolder, ReadMore } from './classes.js';
+import { Project, DesktopIcon, ProjectFolder, ReadMore, FitToScreen } from './classes.js';
 
 
 // ----------------------------------------------------------
@@ -58,7 +58,18 @@ if (yesButton && continuedSection) {
 
 
 // ----------------------------------------------------------
-// 5. Home page: pause button for the scrolling welcome line
+// 5. Desktop pages (Home, About, Work, Toolbox, Contact):
+// zoom out so the whole page fits on the screen
+// ----------------------------------------------------------
+const desktopPages = document.querySelectorAll('.desktop, .toolbox');
+
+desktopPages.forEach((page) => {
+  new FitToScreen(page);
+});
+
+
+// ----------------------------------------------------------
+// 6. Home page: pause button for the scrolling welcome line
 // ----------------------------------------------------------
 const marqueeToggle = document.querySelector('.marquee__toggle');
 
